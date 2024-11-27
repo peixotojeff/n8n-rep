@@ -1,0 +1,408 @@
+{
+  "active": true,
+  "connections": {
+    "Switch1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ActiveCampaign19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ActiveCampaign20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign19": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign17",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign20": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign18",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-13T19:50:42.317Z",
+  "id": "XV3nAnoHrzAsM3HD",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCTUSPAY(DESPERTAR DE LA PROSPERIDAD) -> ACTIVE (Guilhermecvt)",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "d7f3b10a-76b9-4036-b1e5-54f9b0270bb0",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -2880,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.event }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_APPROVED",
+              "output": 1
+            },
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_OUT_OF_SHOPPING_CART",
+              "output": 3
+            },
+            {
+              "operation": "contains",
+              "value2": "CARD_DECLINED",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "edc73d7e-9db7-41a4-8d0d-9d80382599ae",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -2360,
+        2240
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.event }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_APPROVED",
+              "output": 1
+            },
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_OUT_OF_SHOPPING_CART",
+              "output": 3
+            },
+            {
+              "operation": "contains",
+              "value2": "CARD_DECLINED",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "aa59d0d5-e323-4983-9338-4d3873f31edb",
+      "name": "Switch2",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -2320,
+        2520
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "1e46d27d-da2f-472c-b9b4-8300581209af",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"purchase\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-7db8a1ba7f",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "fb431d2a-79ad-4da5-bf15-d83d697b85be",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"purchase\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-c91674887f",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "19a25e07-fac0-47db-b394-5d3e2d1cb426",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"purchase\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-dfeec3e47f",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "2ab798d4-bed3-473f-9dd2-10af5bcf2bac",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2700,
+        2300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "1157",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "fd516d3c-b434-4087-b83f-bd4b9d161357",
+      "name": "ActiveCampaign17",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        2180
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "ef758e98-7e13-4a92-90cc-dff906d6fb2d",
+      "name": "ActiveCampaign19",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -2020,
+        2180
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "1158",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "e718ffaf-53cf-4768-a704-4537ad03d87c",
+      "name": "ActiveCampaign",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        2360
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "1159",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "b47b385b-bdf2-4521-8003-139861096fd4",
+      "name": "ActiveCampaign18",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1780,
+        2560
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "15af4306-da4f-4544-ac70-f25fa859db0c",
+      "name": "ActiveCampaign20",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -2040,
+        2560
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "1160",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "15259d81-774b-4864-a465-d2d40e2ec5fa",
+      "name": "ActiveCampaign1",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1780,
+        2740
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "ThCZCX6Bhtzew3g1",
+          "name": "ActiveCampaign claudiofilho1415"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claudio2",
+        "options": {}
+      },
+      "id": "ab7901c0-b682-4527-b479-c1ea2d3667de",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -3100,
+        2300
+      ],
+      "webhookId": "4d27915a-7720-4ee3-87a8-6cb980a90110"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-11T16:53:54.843Z",
+      "updatedAt": "2024-03-11T16:53:54.843Z",
+      "id": "1",
+      "name": "Active Campaign"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-14T19:38:37.000Z",
+  "versionId": "130a1b24-d142-4a3a-a7df-a7096036bf29"
+}

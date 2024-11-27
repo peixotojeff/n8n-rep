@@ -1,0 +1,453 @@
+{
+  "active": false,
+  "connections": {
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Set3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set3": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista2": {
+      "main": [
+        [
+          {
+            "node": "Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-25T19:34:58.755Z",
+  "id": "5SToPca8TkFNx8CR",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PLAKA - NUVEM - KLAVIYO (Rastreamento)",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.nuvemshop.com.br/v1/1447473/orders",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "shipping_status",
+              "value": "fulfilled"
+            },
+            {
+              "name": "fields",
+              "value": "=contact_email,contact_phone,contact_name,shipping_tracking_number,created_at,total"
+            },
+            {
+              "name": "per_page",
+              "value": "100"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer 885a32d5ade6aec1035af161e8e6bcd90ebaaaf1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (14552)"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "e0cedadb-52db-4959-8a2a-8a527583feb6",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -300,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "367b497b-978c-4294-a50a-c10be2be1b9e",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -100,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4067b7a3-1454-4b74-808c-c41658cbbfdc",
+              "leftValue": "={{ $json.shipping_tracking_number }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "78620b83-61d5-42fe-881c-c63307625adf",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        140,
+        560
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "85fdf4b2-a2bc-4937-b785-dea8c3d6b296",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "Rq3zhC"
+            },
+            {
+              "name": "phone_number",
+              "value": "={{ $node[\"Nuvem\"].json[\"contact_phone\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+            },
+            {
+              "name": "URL Código de Rastreio",
+              "value": "=envia.com/rastreo?label={{$node[\"Nuvem\"].json[\"shipping_tracking_number\"]}}&cntry_code=br"
+            },
+            {
+              "name": "Código de Rastreio",
+              "value": "={{ $node[\"Nuvem\"].json[\"shipping_tracking_number\"] }}"
+            },
+            {
+              "name": "Data",
+              "value": "={{ $json[\"created_at\"] }}"
+            },
+            {
+              "name": "Total pago",
+              "value": "={{ $json.total }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ebb3aa50-1d37-43c9-a9df-b5ef100da9ae",
+      "name": "Set3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        360,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t  \"URL Código de Rastreio\": \"{{ $json[\"URL Código de Rastreio\"] }}\",\n\t\t  \"Código de Rastreio\": \"{{ $json[\"Código de Rastreio\"] }}\"\n        },\n\t\t\"email\": \"{{ $('Set3').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set3').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set3').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "988d74da-b746-4042-a384-c2e794290db4",
+      "name": "Criar Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        560,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set3').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "92ab3b46-af2a-4ab9-9cba-4491ec84eee7",
+      "name": "Colocar na Lista2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        760,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"Código de Rastreio\"] }}\",\n        \"URL Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"URL Código de Rastreio\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Código de Rastreio\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set3\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Set3\"].json[\"Data\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "dc72136b-bece-4165-b9db-8da46544e62c",
+      "name": "Evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        940,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep",
+  "settings": {
+    "executionOrder": "v0",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.572Z",
+      "updatedAt": "2024-11-15T21:24:54.572Z",
+      "id": "bd9wkOJP5S5TNQ5C",
+      "name": "Shopify"
+    },
+    {
+      "createdAt": "2024-11-20T16:51:30.192Z",
+      "updatedAt": "2024-11-20T16:51:30.192Z",
+      "id": "m68TpycasDWTIYmp",
+      "name": "plaka"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-26T18:19:57.000Z",
+  "versionId": "aa56e7f8-2147-4bcd-91ca-94669867e983"
+}

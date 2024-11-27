@@ -1,0 +1,182 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "ActiveCampaign6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign6": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-12T13:54:35.580Z",
+  "id": "3",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCTUSPAY - Grupo vip ( up2 ) -> ACTIVE (Guilhermercvt)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "grupo-up2",
+        "options": {}
+      },
+      "id": "b5ead619-eac4-48f4-97c7-ae155408499d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -2680,
+        2420
+      ],
+      "webhookId": "1791e3d4-6b30-4243-85a8-8b9edffef8ae"
+    },
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "d7ada0da-8045-44ed-acb9-cf60fb22a7d0",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -2460,
+        2420
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.event }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_APPROVED",
+              "output": 1
+            },
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_OUT_OF_SHOPPING_CART",
+              "output": 3
+            },
+            {
+              "operation": "contains",
+              "value2": "CARD_DECLINED",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "15434afe-bd33-4321-82eb-8f6695a67a99",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -2240,
+        2420
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "5",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "8be13870-06ff-49b1-8625-2e69a1dbcbf4",
+      "name": "ActiveCampaign7",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1720,
+        2400
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "8fbd5b02-25d5-4bf9-b88c-60c05f4f52d8",
+      "name": "ActiveCampaign6",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1980,
+        2400
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-11T16:53:54.843Z",
+      "updatedAt": "2024-03-11T16:53:54.843Z",
+      "id": "1",
+      "name": "Active Campaign"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-06-14T16:39:54.000Z",
+  "versionId": "21144974-d96d-4adb-bc91-92633c45abb1"
+}

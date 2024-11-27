@@ -1,0 +1,372 @@
+{
+  "active": false,
+  "connections": {
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato1": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista2": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-11-25T13:19:28.422Z",
+  "id": "8a7J0H1gMioTCcnH",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PLAKA - NUVEM - KLAVIYO (Pedidos PIX) copy",
+  "nodes": [
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "0fc4e32d-19ba-47ed-9aa1-7830b63a82b1",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 7
+            }
+          ]
+        }
+      },
+      "id": "4fd99f95-5c0c-4681-a9fc-1d91f4639eef",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -760,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO- PEDIDOS COM CARRINHB ABANDONADO\n\n",
+        "height": 328,
+        "width": 1242
+      },
+      "id": "cda5447d-717d-48dd-a27b-566535083f2c",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        140
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "https://api.nuvemshop.com.br/v1/1447473/orders",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "payment_status",
+              "value": "pending"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer 885a32d5ade6aec1035af161e8e6bcd90ebaaaf1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (14552)"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "33c3a2cc-1841-4abb-8d01-97fa6b11822e",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -320,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.timestamp }}",
+        "format": "yyyy/MM/dd",
+        "options": {}
+      },
+      "id": "c81816f9-b169-4a86-a35a-fff4df2a5b94",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $json.contact_email }}"
+            },
+            {
+              "name": "List ID",
+              "value": "TvNHfQ"
+            },
+            {
+              "name": "phone_number",
+              "value": "={{ $json.contact_phone }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $json.contact_name }}"
+            },
+            {
+              "name": "API",
+              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+            },
+            {
+              "name": "Numero do pedido",
+              "value": "={{ $json.number }}"
+            },
+            {
+              "name": "Total pago",
+              "value": "=R${{ $json.total.replace('.', ',') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bbaf1a3e-1d06-4ade-b438-408574024e9b",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        260,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.API }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\"Numero do pedido\": \"{{ $item(\"0\").$node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n    \t\"Total pago\": \"{{ $item(\"0\").$node[\"Set2\"].json[\"Total pago\"] }}\"\n\t\t},\n\t\t\"email\": \"{{ $json.email }}\",\n\t\t\"phone_number\": \"+{{ $json.phone_number }}\",\n\t\t\"first_name\": \"{{ $json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "690c21e3-c1f9-4f84-9c70-4a1535ea9830",
+      "name": "Criar Contato1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        420,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/lists/{{ $node[\"Set2\"].json[\"List ID\"] }}/relationships/profiles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set2').item.json[\"API\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"type\": \"profile\",\n      \"id\": \"{{$json.body.data.id }}\"\n    }\n  ]\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "d995fe82-6492-4383-8062-5e47cbe501b0",
+      "name": "Colocar na Lista2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        580,
+        540
+      ],
+      "alwaysOutputData": false,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep",
+  "settings": {
+    "executionOrder": "v0",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.572Z",
+      "updatedAt": "2024-11-15T21:24:54.572Z",
+      "id": "bd9wkOJP5S5TNQ5C",
+      "name": "Shopify"
+    },
+    {
+      "createdAt": "2024-11-20T16:51:30.192Z",
+      "updatedAt": "2024-11-20T16:51:30.192Z",
+      "id": "m68TpycasDWTIYmp",
+      "name": "plaka"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-25T13:21:37.000Z",
+  "versionId": "828491ec-a62c-416c-8807-186eebfe3d3e"
+}

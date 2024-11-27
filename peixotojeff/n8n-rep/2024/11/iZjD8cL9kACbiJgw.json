@@ -1,0 +1,1380 @@
+{
+  "active": true,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set3": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Set5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set5": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato6": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato1": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato2": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato3": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista4": {
+      "main": [
+        [
+          {
+            "node": "Evento2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista": {
+      "main": [
+        [
+          {
+            "node": "Evento1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista1": {
+      "main": [
+        [
+          {
+            "node": "Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista2": {
+      "main": [
+        [
+          {
+            "node": "Evento3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista3": {
+      "main": [
+        [
+          {
+            "node": "Evento4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-20T22:23:02.719Z",
+  "id": "iZjD8cL9kACbiJgw",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "B4YOU -> KLAVIYO (Loja Lucene)",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "d7b98b49-1704-46e8-86ef-4659f01f899d",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        1320
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"Code\"].json[\"event_name\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "generated"
+            },
+            {
+              "value2": "approved-payment",
+              "output": 1
+            },
+            {
+              "value2": "abandoned-cart",
+              "output": 2
+            }
+          ]
+        },
+        "fallbackOutput": 3
+      },
+      "id": "f5f55f22-7b5e-437a-bb9e-1b5f94d853cb",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - PIX\n",
+        "height": 300,
+        "width": 575
+      },
+      "id": "1af41bdd-5a4a-4d04-ab83-9345a2578c15",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - BOLETO",
+        "height": 300,
+        "width": 535
+      },
+      "id": "f183bd98-5839-4132-88de-8e5255f31350",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        1240
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json[\"payment_method\"] }}",
+              "value2": "pix"
+            }
+          ]
+        }
+      },
+      "id": "71edd758-6f49-4d19-8452-5e9b1089f2da",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        600,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $json.customer.email }}"
+            },
+            {
+              "name": "List ID",
+              "value": "YsFhPD"
+            },
+            {
+              "name": "phone_number",
+              "value": "=+55{{ $json[\"customer\"][\"whatsapp\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "pix",
+              "value": "={{ $json.pix.code }}"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $json.customer.full_name }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_dcefbf7d78ca40211fd7f997d1c890e284"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.product.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9f51036a-341d-42b1-8dc1-3bfda32efe6f",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $json.customer.email }}"
+            },
+            {
+              "name": "List ID",
+              "value": "XFPuCp"
+            },
+            {
+              "name": "phone_number",
+              "value": "=+55{{ $json[\"customer\"][\"whatsapp\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "pix",
+              "value": "={{ $json.transactions.data[0].billet_url }}"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $json.customer.full_name }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_dcefbf7d78ca40211fd7f997d1c890e284"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.product.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "532fffc2-57a0-49ed-9ca8-674a616b912a",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - PEDIDO PAGO",
+        "height": 337,
+        "width": 655
+      },
+      "id": "cdf7d073-ffc4-422f-ac45-2e302bc4062e",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        1880
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "U5bXum"
+            },
+            {
+              "name": "phone_number",
+              "value": "=+55{{ $json[\"customer\"][\"whatsapp\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"full_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_dcefbf7d78ca40211fd7f997d1c890e284"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.product.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "65015b5d-b9cc-4cc6-80c4-82248a9b14ad",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        1980
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - Carrinho Abandonado",
+        "height": 357,
+        "width": 795
+      },
+      "id": "873b5978-a2a7-43ab-8b24-29cf0133aaed",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        2480
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "X6Psah"
+            },
+            {
+              "name": "phone_number",
+              "value": "=+55{{ $json[\"customer\"][\"whatsapp\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"full_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_dcefbf7d78ca40211fd7f997d1c890e284"
+            },
+            {
+              "name": "URL Carrinho Abandonado",
+              "value": "={{ $json.checkout.url }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.product.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9737f9f4-24a5-4814-b750-7e9236d7a59d",
+      "name": "Set3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        2620
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b4you",
+        "options": {}
+      },
+      "id": "41491e72-2434-4466-9151-f6b3af0f3905",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -740,
+        1320
+      ],
+      "webhookId": "a04a0a47-9e84-46b5-874c-9cd532e5a01d"
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"Code\"].json[\"event_name\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "refused-payment"
+            }
+          ]
+        }
+      },
+      "id": "5fc0ef1d-9a40-4fb3-abc0-801ed73868c1",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        200,
+        2520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - Compra Recusada",
+        "height": 297,
+        "width": 735
+      },
+      "id": "c4e1a2c0-fffc-4cae-8e1e-757a90810111",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        960,
+        3080
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "Y8pwtw"
+            },
+            {
+              "name": "phone_number",
+              "value": "=+55{{ $json[\"customer\"][\"whatsapp\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{ $node[\"Switch\"].json[\"customer\"][\"full_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_dcefbf7d78ca40211fd7f997d1c890e284"
+            },
+            {
+              "name": "URL Carrinho Abandonado",
+              "value": "={{ $json.checkout.url }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.product.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "79706a76-2ca0-4e6c-a039-24736279bd97",
+      "name": "Set5",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        3160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\"Código Pix\": \"{{ $item(\"0\").$node[\"Set1\"].json[\"pix\"] }}\",\n            \t\"Produto\": \"{{ $item(\"0\").$node[\"Set1\"].json[\"Produto\"] }}\"\n\t\t},\n\t\t\"email\": \"{{ $('Set1').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set1').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set1').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "99ac855b-4fba-451b-b635-cf50ee55851d",
+      "name": "Criar Contato6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1540,
+        840
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\"Código do Boleto\": \"{{ $item(\"0\").$node[\"Set\"].json[\"pix\"] }}\",\n            \t\"Produto\": \"{{ $item(\"0\").$node[\"Set\"].json[\"Produto\"] }}\"\n\t\t},\n\t\t\"email\": \"{{ $('Set').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "1f8bcbef-d13e-4b57-a9bf-2ea8cd9a5450",
+      "name": "Criar Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1420,
+        1360
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n           \t\"Produto\": \"{{ $item(\"0\").$node[\"Set2\"].json[\"Produto\"] }}\"\n\t\t},\n\t\t\"email\": \"{{ $('Set2').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set2').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set2').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "3b472946-d257-41c5-b82f-14ab2b6bde90",
+      "name": "Criar Contato1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1460,
+        1980
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\t\"URL Carrinho Abandonado\": \"{{ $json['URL Carrinho Abandonado'] }}\",\n              \"Produto\": \"{{ $json.Produto }}\"\n\t\t},\n\t\t\"email\": \"{{ $('Set3').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set3').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set3').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "4e0d4fc5-88b4-4533-9d56-078624a8da15",
+      "name": "Criar Contato2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        2620
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\"URL Carrinho Abandonado\": \"{{ $json.PIX }}\",\n            \t\"Produto\": \"{{ $json.Produto }}\"\n\t\t},\n\t\t\"email\": \"{{ $json.email }}\",\n\t\t\"phone_number\": \"+{{ $json.phone_number }}\",\n\t\t\"first_name\": \"{{ $json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "50a9d502-e80d-454c-a1fe-406df250fc1d",
+      "name": "Criar Contato3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1180,
+        3160
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set1').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set1').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "99b1f2f8-efb7-4188-a7f3-ec217df3096f",
+      "name": "Colocar na Lista4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1720,
+        840
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "d7df9a13-3c07-4cd4-a64e-1fb44f1c2add",
+      "name": "Colocar na Lista",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1580,
+        1360
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set2').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set2').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "d533eca3-7976-4b0e-912f-4b2cf518b02d",
+      "name": "Colocar na Lista1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1640,
+        1980
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set3').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "85b7319e-2311-4f6c-bd1a-538795045b9a",
+      "name": "Colocar na Lista2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1680,
+        2620
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set5').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set5').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "0de82b33-c8ba-4594-8976-58348a141cc1",
+      "name": "Colocar na Lista3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        3160
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set1').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set1\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pix Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set1\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "31979e08-56cf-47bf-bf53-067c3c3e4017",
+      "name": "Evento2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1880,
+        840
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Boleto Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "fa007c67-71b1-45b3-8424-112e7d084c45",
+      "name": "Evento1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        1360
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set2').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set2\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido Pago\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "33934b1f-5ff2-49f3-82fa-0f65cffa0d27",
+      "name": "Evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1820,
+        1980
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set3\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Abandoned Cart\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"checkout\"][\"price\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "e7d12abe-f7bd-4062-b9af-df80fbeb5d7f",
+      "name": "Evento3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1840,
+        2620
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set5').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set5\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Refused Transaction\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set5\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "2001eaa6-2e52-47c6-b7f9-cef69fe3579f",
+      "name": "Evento4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1580,
+        3160
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "https://github.com/peixotojeff/n8n-rep",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-26T20:12:22.000Z",
+  "versionId": "4005c46c-7654-4324-9d95-35d1582c8377"
+}

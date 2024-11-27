@@ -1,0 +1,134 @@
+{
+  "active": false,
+  "connections": {
+    "Nuvem": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-18T00:05:42.243Z",
+  "id": "KT4GMkHra0cuwZui",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PLAKA - NUVEM - KLAVIYO (Carrinho Abandonado)",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.nuvemshop.com.br/v1/1447473/checkouts",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "created_at_max",
+              "value": "=2024-11-25"
+            },
+            {
+              "name": "per_page",
+              "value": "1"
+            },
+            {
+              "name": "fields",
+              "value": "contact_name,contact_email,shipping_phone,id,token"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer 885a32d5ade6aec1035af161e8e6bcd90ebaaaf1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (14552)"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a3ec0b95-1f10-4964-ab1f-c2fe6e4d464f",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -160,
+        640
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "95614db3-37d5-4b6e-95cb-a1b97c3c4c87",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        640
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v0",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.572Z",
+      "updatedAt": "2024-11-15T21:24:54.572Z",
+      "id": "bd9wkOJP5S5TNQ5C",
+      "name": "Shopify"
+    },
+    {
+      "createdAt": "2024-11-20T16:51:30.192Z",
+      "updatedAt": "2024-11-20T16:51:30.192Z",
+      "id": "m68TpycasDWTIYmp",
+      "name": "plaka"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-25T19:23:46.000Z",
+  "versionId": "3b89526b-ca50-4ad7-9cb0-884cb034806f"
+}

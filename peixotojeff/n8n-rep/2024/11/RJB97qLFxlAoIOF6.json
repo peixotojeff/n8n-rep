@@ -424,7 +424,8 @@
     "executionOrder": "v0",
     "timezone": "America/Sao_Paulo",
     "saveManualExecutions": true,
-    "callerPolicy": "workflowsFromSameOwner"
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "guji68a2WMFO1TGt"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -452,6 +453,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-26T18:41:49.000Z",
-  "versionId": "c2365dee-2bc4-430e-b373-79c484e820ed"
+  "updatedAt": "2024-11-27T18:40:10.000Z",
+  "versionId": "e64a64fb-d4e0-41ff-ad53-919519e42d03"
 }

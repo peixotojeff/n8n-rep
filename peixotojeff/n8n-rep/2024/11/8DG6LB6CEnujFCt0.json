@@ -169,11 +169,6 @@
           }
         ]
       ]
-    },
-    "If4": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2024-11-27T12:55:35.157Z",
@@ -181,7 +176,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow",
+  "name": "tb",
   "nodes": [
     {
       "parameters": {},
@@ -555,6 +550,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-27T13:49:08.000Z",
-  "versionId": "8687714c-8d9d-4709-9888-225a18ed7662"
+  "updatedAt": "2024-11-27T18:43:50.000Z",
+  "versionId": "20b1998e-950c-4958-a850-46da8df5da88"
 }

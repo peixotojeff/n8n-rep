@@ -1,0 +1,748 @@
+{
+  "active": false,
+  "connections": {
+    "Get Daily Quest": {
+      "main": [
+        [
+          {
+            "node": "Nome Quest [DATA]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dia de Hoje": {
+      "main": [
+        [
+          {
+            "node": "Get Energy levels1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "⚡ Daily Tasks": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Energy levels1": {
+      "main": [
+        [
+          {
+            "node": "Nome Energy [DATA]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ID Energy": {
+      "main": [
+        [
+          {
+            "node": "Get Daily Quest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nome Quest [DATA]": {
+      "main": [
+        [
+          {
+            "node": "[Energy] Daily Quest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nome Energy [DATA]": {
+      "main": [
+        [
+          {
+            "node": "ID Energy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ADD Energy": {
+      "main": [
+        [
+          {
+            "node": "[T] In Gcal?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "ADD Energy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[T] In Gcal?": {
+      "main": [
+        [
+          {
+            "node": "💊 Workflow Routine",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "💊 Workflow Routine": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[Energy] Daily Quest": {
+      "main": [
+        [
+          {
+            "node": "ID Daily Quest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Dia de Hoje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ID Daily Quest": {
+      "main": [
+        [
+          {
+            "node": "⚡ Daily Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-01T14:05:34.055Z",
+  "id": "79PNNbErAClLWmzO",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Notion_Daily_Journal Gcal",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "4bab22df-00f8-40a1-a2a5-931664bb609e",
+          "mode": "list",
+          "cachedResultName": "Daily Quest",
+          "cachedResultUrl": "https://www.notion.so/4bab22df00f840a1a2a5931664bb609e"
+        },
+        "limit": 10,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Show ?|formula",
+              "condition": "equals",
+              "returnType": "checkbox",
+              "checkboxValue": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "19d25daa-c22c-4631-a2f1-f3778bb3c3b1",
+      "name": "Get Daily Quest",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        900,
+        520
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "=Dia de Hoje",
+              "value": "={{$node[\"Schedule Trigger\"].json[\"Month\"]}} {{$node[\"Schedule Trigger\"].json[\"Day of month\"]}},{{$node[\"Schedule Trigger\"].json[\"Year\"]}}"
+            },
+            {
+              "name": "Due Date",
+              "value": "={{ $json[\"Dia de Hoje\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ec79fce7-d366-4f6d-ac46-0c1fdc0dff1e",
+      "name": "Dia de Hoje",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{$node[\"Get Daily Quest\"].json[\"id\"]}}",
+          "mode": "id",
+          "__regex": "^([0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12})"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Day ☀|title",
+              "title": "={{$node[\"Dia de Hoje\"].json[\"Dia de Hoje\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5533fd80-b6bc-47c6-9211-69fe907f7257",
+      "name": "Nome Quest [DATA]",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        520
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json[\"id\"] }}",
+          "mode": "id",
+          "__regex": "^([0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12})"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "={{ $node[\"Dia de Hoje\"].json[\"Dia de Hoje\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6a192d66-d309-4984-8229-aadcd807de4a",
+      "name": "Nome Energy [DATA]",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        500,
+        540
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "9a64d253-d2e6-484d-9a3d-87f27794cd9d",
+          "mode": "list",
+          "cachedResultName": "Sucess Plan",
+          "cachedResultUrl": "https://www.notion.so/9a64d253d2e6484d9a3d87f27794cd9d"
+        },
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Status|status",
+              "condition": "equals",
+              "statusValue": "In Progress"
+            },
+            {
+              "key": "Type|select",
+              "condition": "equals",
+              "selectValue": "Task"
+            },
+            {
+              "key": "Closing Date|date",
+              "condition": "is_empty"
+            },
+            {
+              "key": "Energy|relation",
+              "condition": "is_empty"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3d92898-b57b-419d-92c2-418a20894666",
+      "name": "⚡ Daily Tasks",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        660
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "d24d0d00-1792-42c3-9560-a5097c899f0c",
+          "mode": "list",
+          "cachedResultName": "Energy levels",
+          "cachedResultUrl": "https://www.notion.so/d24d0d00179242c39560a5097c899f0c"
+        },
+        "limit": 10,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Show ?|formula",
+              "condition": "equals",
+              "returnType": "checkbox",
+              "checkboxValue": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "712730f5-4c5b-42ce-b7a0-eea6365a7bc9",
+      "name": "Get Energy levels1",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        320,
+        540
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "ID Energy",
+              "value": "={{ $json[\"id\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e380680-f251-490f-a8b4-ae47742670d7",
+      "name": "ID Energy",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        680,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{$node[\"Get Daily Quest\"].json[\"id\"]}}",
+          "mode": "id",
+          "__regex": "^([0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12})"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Today's Energy|relation",
+              "relationValue": [
+                "={{$node[\"ID Energy\"].json[\"ID Energy\"]}}"
+              ]
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a949ea9c-b4b8-4a4c-af77-624781ce9010",
+      "name": "[Energy] Daily Quest",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        520
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id",
+          "__regex": "^([0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12})"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Energy|relation",
+              "relationValue": [
+                "={{$node[\"ID Energy\"].json[\"ID Energy\"]}}"
+              ]
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fffd558c-aea9-4da1-aeea-acd4fdffb6b6",
+      "name": "ADD Energy",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        2060,
+        660
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "a34a8ed6-2109-4ca6-8ad4-35a93644cc4d",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2680,
+        660
+      ],
+      "webhookId": "54823ad9-e543-4f68-a5a1-9acb236f05ab"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 1
+            }
+          ]
+        }
+      },
+      "id": "e0ffee6d-3a7e-4f22-be8a-2a3310b49783",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "85ebbf14-58e8-477f-9eb0-9d538eb30dcd",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "calendar": "hgaho7rnlbpdrhhbb7q5b1kf9s%40group.calendar.google.com",
+        "start": "={{$json[\"property_due_date\"][\"start\"]}}",
+        "end": "={{$json[\"property_due_date\"][\"start\"]}}",
+        "additionalFields": {
+          "summary": "={{ $json[\"name\"] }}"
+        }
+      },
+      "id": "daa7c6a8-e777-43c2-9d72-1ac240204771",
+      "name": "💊 Workflow Routine",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        660
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "yBfleJfYkXoECpQd",
+          "name": "dentadura3d@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json[\"id\"] }}",
+          "mode": "id",
+          "__regex": "^([0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12})"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "In Gcal?|checkbox",
+              "checkboxValue": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "10d56d63-83a4-41cf-b1b6-89c3f0e838c6",
+      "name": "[T] In Gcal?",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        2300,
+        660
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "sMGCe01Ya1xUm1Sd",
+          "name": "Notion account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "content": "# Energy Name",
+        "height": 235.49276203598947,
+        "width": 581.2901950377019
+      },
+      "id": "52db9ec2-7061-4019-aa30-7d095c8cf6ff",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Daily Quest Name",
+        "height": 244.92935729048804,
+        "width": 553.3448531303749
+      },
+      "id": "987feb03-e9be-460f-a4e7-f50ecf0da5c3",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Task in Calendar",
+        "height": 229.20169853299012,
+        "width": 578.144663286202
+      },
+      "id": "bdc98b07-eaf3-4895-b6fe-a6cac1210573",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        580
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Add Energy",
+        "height": 229.20169853299012,
+        "width": 578.144663286202
+      },
+      "id": "a05c6f70-3091-4d6e-849d-e09fb21b11e5",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        580
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "ID Daily Quest",
+              "value": "={{ $item(\"0\").$node[\"[Energy] Daily Quest\"].json[\"id\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "17d951b3-3380-4734-9cdf-16c8e82c4d45",
+      "name": "ID Daily Quest",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.timestamp }}",
+        "dataPropertyName": "Dia de Hoje",
+        "toFormat": "MM-DD-YYYY",
+        "options": {}
+      },
+      "id": "7eed0c60-1ed4-43ed-bc74-56a2700d0906",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        520
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-10-01T14:03:58.868Z",
+      "updatedAt": "2024-10-01T14:03:58.868Z",
+      "id": "sMupkI00Ew24nZ56",
+      "name": "Notion"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-27T21:51:23.000Z",
+  "versionId": "70d40aa1-dcee-49d9-8a4a-5bc7003f9761"
+}

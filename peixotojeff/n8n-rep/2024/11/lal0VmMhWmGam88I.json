@@ -589,8 +589,8 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes",
-              "minutesInterval": 3
+              "triggerAtHour": 1,
+              "triggerAtMinute": 33
             }
           ]
         }
@@ -850,6 +850,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-11-27T14:52:23.000Z",
-  "versionId": "39d79486-5b36-4560-b0e0-ddb97b7ee777"
+  "updatedAt": "2024-11-27T14:55:02.000Z",
+  "versionId": "a9571d84-9cea-48e4-a9a8-e36e7adde359"
 }

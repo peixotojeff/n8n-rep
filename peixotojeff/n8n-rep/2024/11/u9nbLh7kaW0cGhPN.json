@@ -914,7 +914,9 @@
   "repo_owner": "peixotojeff",
   "repo_path": "peixotojeff/n8n-rep/",
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "guji68a2WMFO1TGt"
   },
   "staticData": null,
   "tags": [
@@ -926,6 +928,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-26T18:46:28.000Z",
-  "versionId": "c1d40dbb-1d5d-4256-a73e-63e03710d27e"
+  "updatedAt": "2024-11-27T18:40:33.000Z",
+  "versionId": "d1a72de1-b0b0-4645-8c92-6732c208afcf"
 }

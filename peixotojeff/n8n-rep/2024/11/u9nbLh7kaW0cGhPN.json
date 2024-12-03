@@ -67,6 +67,11 @@
       "main": [
         [
           {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
             "node": "Criar Contato1",
             "type": "main",
             "index": 0
@@ -167,6 +172,11 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        []
       ]
     }
   },
@@ -477,7 +487,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        600,
+        560,
         1300
       ]
     },
@@ -626,7 +636,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        760,
+        980,
         1300
       ],
       "alwaysOutputData": true,
@@ -757,7 +767,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        960,
+        1180,
         1300
       ],
       "alwaysOutputData": true,
@@ -805,7 +815,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1140,
+        1360,
         1300
       ],
       "alwaysOutputData": true,
@@ -907,6 +917,143 @@
       "alwaysOutputData": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE",
+          "mode": "list",
+          "cachedResultName": "VENDAS PLAKA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TEL": "={{ $node[\"Set2\"].json[\"Numero do pedido\"] }}",
+            "Total pago": "={{ $node[\"Set2\"].json[\"Total pago\"] }}",
+            "UTM Source": "={{$node[\"Set2\"].json[\"UTM Source\"] }}",
+            "UTM Campaign": "={{$node[\"Set2\"].json[\"UTM Campaign\"] }}",
+            "UTM Medium": "={{$node[\"Set2\"].json[\"UTM Medium\"] }}",
+            "EMAIL": "={{$node[\"Set2\"].json[\"email\"] }}",
+            "Numero do pedido": "={{$node[\"Set2\"].json[\"phone_number\"] }}",
+            "NOME": "={{$node[\"Set2\"].json[\"First Name\"] }}",
+            "Date": "={{ $node[\"Nuvem\"].json[\"paid_at\"] }}"
+          },
+          "matchingColumns": [
+            "Date"
+          ],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOME",
+              "displayName": "NOME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TEL",
+              "displayName": "TEL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Numero do pedido",
+              "displayName": "Numero do pedido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Total pago",
+              "displayName": "Total pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM Source",
+              "displayName": "UTM Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM Medium",
+              "displayName": "UTM Medium",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM Campaign",
+              "displayName": "UTM Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        1520
+      ],
+      "id": "a26455b2-22b0-4eec-9bb2-a6d772dbba1f",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aHfauSViH63CvmHf",
+          "name": "Google Sheets Reconverte"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -928,6 +1075,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-27T18:40:33.000Z",
-  "versionId": "d1a72de1-b0b0-4645-8c92-6732c208afcf"
+  "updatedAt": "2024-12-03T04:19:41.000Z",
+  "versionId": "bb798d85-4dc1-41d9-a24d-560a117c7c70"
 }

@@ -1,0 +1,223 @@
+{
+  "active": true,
+  "connections": {
+    "ActiveCampaign6": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign7",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Curso: Special Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-03T22:59:31.283Z",
+  "id": "PQvSxXhJQuzr3Txt",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCTUSPAY - VIP Group (UP2, DOWN2)  2 -> ACTIVE (Guilhermercvt)",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "32112b1f-5201-41f4-be82-5845f22c958f",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -2540,
+        2420
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "41",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "cc19d5be-b1cf-44e3-80f9-c29f8ca9e3d6",
+      "name": "ActiveCampaign7",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1660,
+        2400
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "24ef8919-cff8-4845-a84c-09558bc83b5b",
+      "name": "ActiveCampaign6",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1920,
+        2400
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6acb4f37-1983-4205-b791-2a1baee54048",
+        "options": {}
+      },
+      "id": "cf04841d-0be4-4795-8875-86d6a1c59b0c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2700,
+        2420
+      ],
+      "webhookId": "6acb4f37-1983-4205-b791-2a1baee54048"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://memberkit.com.br/api/v1/users",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "api_key",
+              "value": "xLE7rWV7EPd7gKPSh7B7TJ4T"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.data.buyer.email }}\",\n  \"full_name\": \"{{ $json.data.buyer.name }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    184145\n  ]\n}",
+        "options": {}
+      },
+      "id": "7b756c84-4340-4a1a-8fb6-2ffb7dfe53f2",
+      "name": "Curso: Special Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1660,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c27a5d0b-69d4-4d27-b827-6cc86f851c08",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-07f42687b0",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "d9fd7f77-bf86-4fc7-8efd-a5bc8ff96038",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-5fe9463db0",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "bc2bfade-283f-46eb-a1d4-4cae7f270cf3",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        -2320,
+        2420
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-11T16:53:54.843Z",
+      "updatedAt": "2024-03-11T16:53:54.843Z",
+      "id": "1",
+      "name": "Active Campaign"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-12-03T23:56:11.000Z",
+  "versionId": "b2cb9510-08a3-454f-80c8-feec676845ff"
+}

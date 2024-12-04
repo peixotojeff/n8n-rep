@@ -1,0 +1,468 @@
+{
+  "active": true,
+  "connections": {
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign19",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ActiveCampaign20",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ActiveCampaign22",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign19": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign17",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign20": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign18",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign22": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign21",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-03T22:36:32.598Z",
+  "id": "56tERszEb134pqs5",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCTUSPAY(VIP Tool) 2 -> ACTIVE (Guilhermecvt)",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "ffb5e901-6640-4196-94de-dd8144e1b684",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -2740,
+        2220
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.event }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_APPROVED"
+            },
+            {
+              "operation": "contains",
+              "value2": "PURCHASE_OUT_OF_SHOPPING_CART",
+              "output": 2
+            },
+            {
+              "operation": "contains",
+              "value2": "CARD_DECLINED",
+              "output": 1
+            }
+          ]
+        }
+      },
+      "id": "4cd2f255-9723-45fa-8767-5a2caa416d98",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -2320,
+        2220
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "40",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "0126afa2-5153-445a-9c82-6a4b43843a7e",
+      "name": "ActiveCampaign17",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1480,
+        1780
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "bff62c06-c3ff-4b1f-a619-56c1994f2580",
+      "name": "ActiveCampaign19",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        1900
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 15,
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "276bb816-f691-43df-b4dc-c11e8e23618e",
+      "name": "ActiveCampaign",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        1960
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b12d1cf0-64f5-45d1-9170-4aade0812c01",
+        "options": {}
+      },
+      "id": "920ad731-13c9-498a-aa6b-5f64eb34aecc",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2920,
+        2220
+      ],
+      "webhookId": "b12d1cf0-64f5-45d1-9170-4aade0812c01"
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "operation": "remove",
+        "listId": 16,
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "19ccaf97-89ff-42a2-ab54-ea7b703ffd7f",
+      "name": "ActiveCampaign1",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1160,
+        1980
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "39",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "11ece2cd-a6f4-40e2-8761-adb444f71759",
+      "name": "ActiveCampaign18",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1400,
+        2160
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "bbace4c2-3d40-4aaa-8d50-167336148109",
+      "name": "ActiveCampaign20",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        2280
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 16,
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "b1d98cfc-449d-4034-9a74-69bc4691bf12",
+      "name": "ActiveCampaign2",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1340,
+        2340
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactTag",
+        "tagId": "38",
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "263b4a3e-2127-420f-97b9-c9f703485612",
+      "name": "ActiveCampaign21",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1400,
+        2460
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $json.data.buyer.name }}",
+          "phone": "={{ $json.data.buyer.checkout_phone }}"
+        }
+      },
+      "id": "8d69fb0f-2165-4c38-912c-39f952a97d0a",
+      "name": "ActiveCampaign22",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        2540
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 16,
+        "contactId": "={{ $json[\"id\"] }}"
+      },
+      "id": "290aced8-a7c5-4a44-82a2-8dc163a68ed4",
+      "name": "ActiveCampaign3",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1560,
+        2700
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c27a5d0b-69d4-4d27-b827-6cc86f851c08",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-b5892909b0",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "d9fd7f77-bf86-4fc7-8efd-a5bc8ff96038",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-8f8beffdb1",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "27f767d3-0dd6-433f-b951-d92d6e11e4e3",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        -2520,
+        2220
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-03-11T16:53:54.843Z",
+      "updatedAt": "2024-03-11T16:53:54.843Z",
+      "id": "1",
+      "name": "Active Campaign"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-12-03T23:49:46.000Z",
+  "versionId": "416387b7-0283-4541-a1ea-468c1b8ff648"
+}

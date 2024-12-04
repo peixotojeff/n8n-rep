@@ -938,13 +938,13 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "TEL": "={{ $node[\"Set2\"].json[\"Numero do pedido\"] }}",
+            "TEL": "={{$node[\"Set2\"].json[\"phone_number\"] }}",
             "Total pago": "={{ $node[\"Set2\"].json[\"Total pago\"] }}",
             "UTM Source": "={{$node[\"Set2\"].json[\"UTM Source\"] }}",
             "UTM Campaign": "={{$node[\"Set2\"].json[\"UTM Campaign\"] }}",
             "UTM Medium": "={{$node[\"Set2\"].json[\"UTM Medium\"] }}",
             "EMAIL": "={{$node[\"Set2\"].json[\"email\"] }}",
-            "Numero do pedido": "={{$node[\"Set2\"].json[\"phone_number\"] }}",
+            "Numero do pedido": "={{ $node[\"Set2\"].json[\"Numero do pedido\"] }}",
             "NOME": "={{$node[\"Set2\"].json[\"First Name\"] }}",
             "Date": "={{ $node[\"Nuvem\"].json[\"paid_at\"] }}"
           },
@@ -1075,6 +1075,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-03T04:19:41.000Z",
-  "versionId": "bb798d85-4dc1-41d9-a24d-560a117c7c70"
+  "updatedAt": "2024-12-03T10:07:27.000Z",
+  "versionId": "8f8806e3-7b33-49a9-a608-f12ee01e17f5"
 }

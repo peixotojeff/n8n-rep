@@ -28,22 +28,22 @@
         ]
       ]
     },
-    "Webhook": {
+    "Filter": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "ActiveCampaign6",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Filter": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "ActiveCampaign6",
+            "node": "Code",
             "type": "main",
             "index": 0
           }
@@ -67,14 +67,14 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -2540,
-        2420
+        -2580,
+        2400
       ]
     },
     {
       "parameters": {
         "resource": "contactTag",
-        "tagId": "41",
+        "tagId": "5",
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "cc19d5be-b1cf-44e3-80f9-c29f8ca9e3d6",
@@ -118,22 +118,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "6acb4f37-1983-4205-b791-2a1baee54048",
-        "options": {}
-      },
-      "id": "cf04841d-0be4-4795-8875-86d6a1c59b0c",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -2700,
-        2420
-      ],
-      "webhookId": "6acb4f37-1983-4205-b791-2a1baee54048"
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://memberkit.com.br/api/v1/users",
         "sendQuery": true,
@@ -147,7 +131,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $json.data.buyer.email }}\",\n  \"full_name\": \"{{ $json.data.buyer.name }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    184145\n  ]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"email\"] }}\",\n  \"full_name\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"name\"] }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    184145\n  ]\n}",
         "options": {}
       },
       "id": "7b756c84-4340-4a1a-8fb6-2ffb7dfe53f2",
@@ -170,7 +154,7 @@
           "conditions": [
             {
               "id": "c27a5d0b-69d4-4d27-b827-6cc86f851c08",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-07f42687b0",
               "operator": {
                 "type": "string",
@@ -180,7 +164,7 @@
             },
             {
               "id": "d9fd7f77-bf86-4fc7-8efd-a5bc8ff96038",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-5fe9463db0",
               "operator": {
                 "type": "string",
@@ -198,16 +182,37 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        -2320,
-        2420
+        -2240,
+        2400
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6acb4f37-1983-4205-b791-2a1baee54048",
+        "options": {}
+      },
+      "id": "cf04841d-0be4-4795-8875-86d6a1c59b0c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2740,
+        2400
+      ],
+      "webhookId": "6acb4f37-1983-4205-b791-2a1baee54048"
     }
   ],
   "pinData": {},
   "repo_name": "n8n-rep",
   "repo_owner": "peixotojeff",
   "repo_path": "peixotojeff/n8n-rep/",
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionOrder": "v0",
+    "errorWorkflow": "5g0jCsFhX4YZWEUU"
+  },
   "staticData": null,
   "tags": [
     {
@@ -218,6 +223,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-03T23:56:11.000Z",
-  "versionId": "b2cb9510-08a3-454f-80c8-feec676845ff"
+  "updatedAt": "2024-12-05T01:39:32.000Z",
+  "versionId": "e160b283-07ff-4306-868c-41c8875b1c6b"
 }

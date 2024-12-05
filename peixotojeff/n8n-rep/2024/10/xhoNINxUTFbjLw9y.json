@@ -645,7 +645,12 @@
   "repo_name": "n8n-rep",
   "repo_owner": "peixotojeff",
   "repo_path": "peixotojeff/n8n-rep/",
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionOrder": "v0",
+    "errorWorkflow": "5g0jCsFhX4YZWEUU"
+  },
   "staticData": null,
   "tags": [
     {
@@ -656,6 +661,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-15T04:46:58.000Z",
-  "versionId": "f6100228-fe30-47ac-93ce-29a75c75f72b"
+  "updatedAt": "2024-12-04T21:03:43.000Z",
+  "versionId": "26fe82be-05a8-4837-84a7-e28780a73114"
 }

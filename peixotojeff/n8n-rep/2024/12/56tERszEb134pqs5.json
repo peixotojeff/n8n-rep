@@ -3,13 +3,7 @@
   "connections": {
     "Switch1": {
       "main": [
-        [
-          {
-            "node": "ActiveCampaign19",
-            "type": "main",
-            "index": 0
-          }
-        ],
+        [],
         [
           {
             "node": "ActiveCampaign20",
@@ -30,7 +24,7 @@
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -46,23 +40,7 @@
             "index": 0
           },
           {
-            "node": "ActiveCampaign",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "ActiveCampaign1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Code",
+            "node": "Curso: New Profession",
             "type": "main",
             "index": 0
           }
@@ -105,7 +83,58 @@
       "main": [
         [
           {
+            "node": "ActiveCampaign19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
             "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign17": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign1",
             "type": "main",
             "index": 0
           }
@@ -129,7 +158,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -2740,
+        -2700,
         2220
       ]
     },
@@ -161,14 +190,14 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -2320,
-        2220
+        -2140,
+        2000
       ]
     },
     {
       "parameters": {
         "resource": "contactTag",
-        "tagId": "40",
+        "tagId": "3",
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "0126afa2-5153-445a-9c82-6a4b43843a7e",
@@ -176,8 +205,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1480,
-        1780
+        -1520,
+        2580
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -200,8 +229,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1840,
-        1900
+        -1740,
+        2600
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -215,15 +244,15 @@
       "parameters": {
         "resource": "contactList",
         "listId": 15,
-        "contactId": "={{ $json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
       },
       "id": "276bb816-f691-43df-b4dc-c11e8e23618e",
       "name": "ActiveCampaign",
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1420,
-        1960
+        -1360,
+        2580
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -234,34 +263,18 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "b12d1cf0-64f5-45d1-9170-4aade0812c01",
-        "options": {}
-      },
-      "id": "920ad731-13c9-498a-aa6b-5f64eb34aecc",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -2920,
-        2220
-      ],
-      "webhookId": "b12d1cf0-64f5-45d1-9170-4aade0812c01"
-    },
-    {
-      "parameters": {
         "resource": "contactList",
         "operation": "remove",
         "listId": 16,
-        "contactId": "={{ $json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
       },
       "id": "19ccaf97-89ff-42a2-ab54-ea7b703ffd7f",
       "name": "ActiveCampaign1",
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1160,
-        1980
+        -1200,
+        2580
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -273,7 +286,7 @@
     {
       "parameters": {
         "resource": "contactTag",
-        "tagId": "39",
+        "tagId": "2",
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "11ece2cd-a6f4-40e2-8761-adb444f71759",
@@ -281,8 +294,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1400,
-        2160
+        -1380,
+        1740
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -305,8 +318,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1760,
-        2280
+        -1740,
+        1860
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -327,8 +340,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1340,
-        2340
+        -1320,
+        1900
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -340,7 +353,7 @@
     {
       "parameters": {
         "resource": "contactTag",
-        "tagId": "38",
+        "tagId": "1",
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "263b4a3e-2127-420f-97b9-c9f703485612",
@@ -348,8 +361,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1400,
-        2460
+        -1480,
+        2080
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -372,8 +385,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1840,
-        2540
+        -1820,
+        2120
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -394,8 +407,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1560,
-        2700
+        -1480,
+        2280
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -415,7 +428,7 @@
           "conditions": [
             {
               "id": "c27a5d0b-69d4-4d27-b827-6cc86f851c08",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-b5892909b0",
               "operator": {
                 "type": "string",
@@ -425,7 +438,7 @@
             },
             {
               "id": "d9fd7f77-bf86-4fc7-8efd-a5bc8ff96038",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-8f8beffdb1",
               "operator": {
                 "type": "string",
@@ -443,8 +456,94 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        -2520,
+        -2080,
+        2640
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b12d1cf0-64f5-45d1-9170-4aade0812c01",
+        "options": {}
+      },
+      "id": "920ad731-13c9-498a-aa6b-5f64eb34aecc",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2880,
         2220
+      ],
+      "webhookId": "b12d1cf0-64f5-45d1-9170-4aade0812c01"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "11faee38-4b6a-4c0e-907e-97a15849f665",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-b5892909b0",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "1931d244-742b-4024-a11b-9c6c64cbe77f",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "rightValue": "OF-8f8beffdb1",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "9f131ad5-35c9-49e7-bbee-9e4bfd8af818",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2460,
+        2200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://memberkit.com.br/api/v1/users",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "api_key",
+              "value": "xLE7rWV7EPd7gKPSh7B7TJ4T"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"email\"] }}\",\n  \"full_name\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"name\"] }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    179180\n  ]\n}",
+        "options": {}
+      },
+      "id": "99f60eba-8de3-46b4-b952-4bdd365d1ec8",
+      "name": "Curso: New Profession",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1500,
+        2740
       ]
     }
   ],
@@ -452,7 +551,12 @@
   "repo_name": "n8n-rep",
   "repo_owner": "peixotojeff",
   "repo_path": "peixotojeff/n8n-rep/",
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionOrder": "v0",
+    "errorWorkflow": "5g0jCsFhX4YZWEUU"
+  },
   "staticData": null,
   "tags": [
     {
@@ -463,6 +567,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-03T23:49:46.000Z",
-  "versionId": "416387b7-0283-4541-a1ea-468c1b8ff648"
+  "updatedAt": "2024-12-05T01:14:00.000Z",
+  "versionId": "a33bcff2-a3cd-42ca-b653-3a49df77c010"
 }

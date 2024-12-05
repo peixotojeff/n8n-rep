@@ -1,0 +1,103 @@
+{
+  "active": false,
+  "connections": {
+    "On Error": {
+      "main": [
+        [
+          {
+            "node": "Set message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set message": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-04T21:01:32.328Z",
+  "id": "5g0jCsFhX4YZWEUU",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "🚨 Report n8n workflow errors to Telegram",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "fe5793f9-dff5-4c21-8cc2-2ad2e019f1bd",
+      "name": "On Error",
+      "type": "n8n-nodes-base.errorTrigger",
+      "position": [
+        460,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "message",
+              "value": "=⚠️ Workflow `{{$json[\"workflow\"][\"name\"]}}` failed to run! [execution]({{ $json.execution.url }})"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7513826d-bd4a-490c-969f-7d626ec573a2",
+      "name": "Set message",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        760,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chatId": "@peixotomidiasnews",
+        "text": "={{ $json.message }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "7f1c2375-2ebc-4c3e-8687-92d07c0b95be",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        1060,
+        460
+      ],
+      "typeVersion": 1.1,
+      "credentials": {
+        "telegramApi": {
+          "id": "iq6potFcJrrEQEJj",
+          "name": "Telegram Agent N8N"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-04T21:01:47.000Z",
+  "versionId": "637f1ab5-73b8-4d1f-b4da-7db12e5b331c"
+}

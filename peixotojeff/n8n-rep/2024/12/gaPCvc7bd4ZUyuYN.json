@@ -28,22 +28,22 @@
         ]
       ]
     },
-    "Webhook": {
+    "Filter": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "ActiveCampaign6",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Filter": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "ActiveCampaign6",
+            "node": "Code",
             "type": "main",
             "index": 0
           }
@@ -74,7 +74,7 @@
     {
       "parameters": {
         "resource": "contactTag",
-        "tagId": "42",
+        "tagId": "4",
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "8d6c964f-8bd9-4ec2-b030-ea8abb1cb431",
@@ -118,22 +118,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "0e874d27-4014-47aa-8bfc-990ddbab00b1",
-        "options": {}
-      },
-      "id": "66449d6f-4e19-449e-924f-ab68bc18ea51",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -2740,
-        2420
-      ],
-      "webhookId": "0e874d27-4014-47aa-8bfc-990ddbab00b1"
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://memberkit.com.br/api/v1/users",
         "sendQuery": true,
@@ -147,7 +131,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $json.data.buyer.email }}\",\n  \"full_name\": \"{{ $json.data.buyer.name }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    184145\n  ]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"email\"] }}\",\n  \"full_name\": \"{{ $node[\"Code\"].json[\"data\"][\"buyer\"][\"name\"] }}\",\n  \"status\": \"active\",\n  \"classroom_ids\": [\n    184145\n  ]\n}",
         "options": {}
       },
       "id": "4a0a4a0a-f2ea-46e3-a125-df240361d5cb",
@@ -170,7 +154,7 @@
           "conditions": [
             {
               "id": "c27a5d0b-69d4-4d27-b827-6cc86f851c08",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-7e047de4b0",
               "operator": {
                 "type": "string",
@@ -180,7 +164,7 @@
             },
             {
               "id": "d9fd7f77-bf86-4fc7-8efd-a5bc8ff96038",
-              "leftValue": "={{ $node[\"Code\"].json[\"data\"][\"offer\"][\"code\"] }}",
+              "leftValue": "={{ $node[\"Code\"].json[\"data\"]['purchase'][\"offer\"][\"code\"] }}",
               "rightValue": "OF-92970ed4b0",
               "operator": {
                 "type": "string",
@@ -201,13 +185,34 @@
         -2280,
         2420
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "0e874d27-4014-47aa-8bfc-990ddbab00b1",
+        "options": {}
+      },
+      "id": "66449d6f-4e19-449e-924f-ab68bc18ea51",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2740,
+        2420
+      ],
+      "webhookId": "0e874d27-4014-47aa-8bfc-990ddbab00b1"
     }
   ],
   "pinData": {},
   "repo_name": "n8n-rep",
   "repo_owner": "peixotojeff",
   "repo_path": "peixotojeff/n8n-rep/",
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionOrder": "v0",
+    "errorWorkflow": "5g0jCsFhX4YZWEUU"
+  },
   "staticData": null,
   "tags": [
     {
@@ -218,6 +223,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-03T23:56:42.000Z",
-  "versionId": "7ed8160b-4c5d-4c09-8c55-874973945772"
+  "updatedAt": "2024-12-05T01:40:10.000Z",
+  "versionId": "d6063ebd-1629-4b40-a6b6-1dcffd2c700a"
 }

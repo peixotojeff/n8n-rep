@@ -12,7 +12,7 @@
         ],
         [
           {
-            "node": "Set2",
+            "node": "Date",
             "type": "main",
             "index": 0
           }
@@ -178,6 +178,17 @@
       "main": [
         []
       ]
+    },
+    "Date": {
+      "main": [
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-11-15T21:43:56.992Z",
@@ -271,7 +282,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        -80,
+        140,
         420
       ]
     },
@@ -325,7 +336,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        600,
+        820,
         160
       ]
     },
@@ -379,7 +390,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        580,
+        800,
         680
       ]
     },
@@ -487,7 +498,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        560,
+        780,
         1300
       ]
     },
@@ -546,7 +557,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        800,
+        1020,
         160
       ],
       "alwaysOutputData": true,
@@ -591,7 +602,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        740,
+        960,
         680
       ],
       "alwaysOutputData": true,
@@ -636,7 +647,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        980,
+        1200,
         1300
       ],
       "alwaysOutputData": true,
@@ -679,7 +690,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        960,
+        1180,
         160
       ],
       "alwaysOutputData": true,
@@ -723,7 +734,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        940,
+        1160,
         680
       ],
       "alwaysOutputData": true,
@@ -767,7 +778,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1180,
+        1400,
         1300
       ],
       "alwaysOutputData": true,
@@ -815,7 +826,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1360,
+        1580,
         1300
       ],
       "alwaysOutputData": true,
@@ -863,7 +874,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1120,
+        1340,
         680
       ],
       "alwaysOutputData": true,
@@ -911,7 +922,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1140,
+        1360,
         160
       ],
       "alwaysOutputData": true,
@@ -946,7 +957,7 @@
             "EMAIL": "={{$node[\"Set2\"].json[\"email\"] }}",
             "Numero do pedido": "={{ $node[\"Set2\"].json[\"Numero do pedido\"] }}",
             "NOME": "={{$node[\"Set2\"].json[\"First Name\"] }}",
-            "Date": "={{ $node[\"Nuvem\"].json[\"paid_at\"] }}"
+            "Date": "={{ $node[\"Date\"].json[\"date\"]}}"
           },
           "matchingColumns": [
             "Date"
@@ -1043,17 +1054,34 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        800,
-        1520
+        1140,
+        1500
       ],
       "id": "a26455b2-22b0-4eec-9bb2-a6d772dbba1f",
       "name": "Google Sheets",
+      "retryOnFail": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "aHfauSViH63CvmHf",
           "name": "Google Sheets Reconverte"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $node[\"Nuvem\"].json[\"paid_at\"]}}",
+        "outputFieldName": "date",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        600,
+        1300
+      ],
+      "id": "8cda9686-5b2e-4af9-923b-3b8702b7ac54",
+      "name": "Date"
     }
   ],
   "pinData": {},
@@ -1075,6 +1103,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-03T10:07:27.000Z",
-  "versionId": "8f8806e3-7b33-49a9-a608-f12ee01e17f5"
+  "updatedAt": "2024-12-05T03:50:03.000Z",
+  "versionId": "589228f3-2f3f-402a-8362-b0e20354249d"
 }

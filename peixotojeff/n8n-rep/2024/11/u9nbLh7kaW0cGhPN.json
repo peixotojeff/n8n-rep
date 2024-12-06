@@ -471,11 +471,11 @@
             },
             {
               "name": "Numero do pedido",
-              "value": "={{ $json.number }}"
+              "value": "={{ $node[\"Nuvem\"].json[\"number\"] }}"
             },
             {
               "name": "Total pago",
-              "value": "={{ $json.total}}"
+              "value": "={{ $node[\"Nuvem\"].json[\"total\"] }}"
             },
             {
               "name": "UTM Source",
@@ -931,7 +931,7 @@
     },
     {
       "parameters": {
-        "operation": "appendOrUpdate",
+        "operation": "append",
         "documentId": {
           "__rl": true,
           "value": "1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE",
@@ -1103,6 +1103,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-05T03:50:03.000Z",
-  "versionId": "589228f3-2f3f-402a-8362-b0e20354249d"
+  "updatedAt": "2024-12-05T09:50:33.000Z",
+  "versionId": "a159131a-0047-422c-b73d-895b05bae4e5"
 }

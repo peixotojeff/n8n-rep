@@ -248,6 +248,17 @@
           }
         ]
       ]
+    },
+    "Evento": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-11-20T22:23:02.719Z",
@@ -1363,6 +1374,147 @@
       "alwaysOutputData": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE",
+          "mode": "list",
+          "cachedResultName": "VENDAS PLAKA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mQXKqZUrvPlNO-PFEyhM-mQF7tNycBEJb9Ndag3s0sE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TEL": "=+{{ $('Set2').item.json[\"phone_number\"] }}",
+            "Total pago": "={{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}",
+            "EMAIL": "={{ $('Set2').item.json['email']}}",
+            "NOME": "={{$('Set2').item.json[\"First Name\"] }}",
+            "Date": "={{ $node[\"Switch\"].json[\"created_at\"] }}",
+            "UTM Source": "={{ $node[\"Code\"].json[\"tracking_parameters\"][\"utm_source\"] }}",
+            "UTM Medium": "={{ $node[\"Code\"].json[\"tracking_parameters\"][\"utm_medium\"] }}",
+            "UTM Campaign": "={{ $node[\"Code\"].json[\"tracking_parameters\"][\"utm_campaign\"] }}"
+          },
+          "matchingColumns": [
+            "Date"
+          ],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOME",
+              "displayName": "NOME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TEL",
+              "displayName": "TEL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Numero do pedido",
+              "displayName": "Numero do pedido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Total pago",
+              "displayName": "Total pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM Source",
+              "displayName": "UTM Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UTM Medium",
+              "displayName": "UTM Medium",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UTM Campaign",
+              "displayName": "UTM Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2040,
+        1980
+      ],
+      "id": "1e4f6fd4-69b0-4096-8c68-752ea78eb913",
+      "name": "Google Sheets",
+      "retryOnFail": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aHfauSViH63CvmHf",
+          "name": "Google Sheets Reconverte"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1377,6 +1529,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-11-27T18:39:58.000Z",
-  "versionId": "a98ae35a-50f7-4688-b43e-97a93e0ddef5"
+  "updatedAt": "2024-12-06T21:44:33.000Z",
+  "versionId": "e26c77df-354c-41f5-b86b-1950b0af584b"
 }

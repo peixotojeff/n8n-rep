@@ -266,7 +266,7 @@
       "parameters": {
         "resource": "contactList",
         "operation": "remove",
-        "listId": 16,
+        "listId": 1,
         "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
       },
       "id": "19ccaf97-89ff-42a2-ab54-ea7b703ffd7f",
@@ -334,7 +334,7 @@
     {
       "parameters": {
         "resource": "contactList",
-        "listId": 16,
+        "listId": 1,
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "b1d98cfc-449d-4034-9a74-69bc4691bf12",
@@ -402,7 +402,7 @@
     {
       "parameters": {
         "resource": "contactList",
-        "listId": 16,
+        "listId": 1,
         "contactId": "={{ $json[\"id\"] }}"
       },
       "id": "290aced8-a7c5-4a44-82a2-8dc163a68ed4",
@@ -557,8 +557,7 @@
   "settings": {
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
-    "executionOrder": "v0",
-    "errorWorkflow": "5g0jCsFhX4YZWEUU"
+    "executionOrder": "v0"
   },
   "staticData": null,
   "tags": [
@@ -570,6 +569,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-05T14:55:07.000Z",
-  "versionId": "2c5a35ba-bd3f-4928-ab16-fe78b57a1ea7"
+  "updatedAt": "2024-12-09T22:44:16.000Z",
+  "versionId": "76c8a069-a166-438d-a532-bd7f66776ec5"
 }

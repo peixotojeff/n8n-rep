@@ -49,6 +49,28 @@
           }
         ]
       ]
+    },
+    "ActiveCampaign": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign7": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-12-03T22:54:41.292Z",
@@ -82,8 +104,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1560,
-        2400
+        -1580,
+        2360
       ],
       "credentials": {
         "activeCampaignApi": {
@@ -201,6 +223,49 @@
         2420
       ],
       "webhookId": "0e874d27-4014-47aa-8bfc-990ddbab00b1"
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 15,
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+      },
+      "id": "b630302f-eaa1-4e2d-b7fd-0c6d40e4cbbe",
+      "name": "ActiveCampaign",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        2340
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "operation": "remove",
+        "listId": 1,
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+      },
+      "id": "393a9cff-3e32-4e1e-8d94-5e7f3f3352ad",
+      "name": "ActiveCampaign1",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        2340
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "1",
+          "name": "ActiveCampaign Guilhermercvt"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -223,6 +288,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-05T01:40:10.000Z",
-  "versionId": "d6063ebd-1629-4b40-a6b6-1dcffd2c700a"
+  "updatedAt": "2024-12-09T22:45:05.000Z",
+  "versionId": "0e79a430-41e7-4652-b7da-f0ec0f702894"
 }

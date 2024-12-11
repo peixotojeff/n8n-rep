@@ -107,6 +107,7 @@
         -1580,
         2360
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -131,6 +132,7 @@
         -2000,
         2400
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -228,7 +230,7 @@
       "parameters": {
         "resource": "contactList",
         "listId": 15,
-        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign6\"].json[\"id\"] }}"
       },
       "id": "b630302f-eaa1-4e2d-b7fd-0c6d40e4cbbe",
       "name": "ActiveCampaign",
@@ -238,6 +240,7 @@
         -1420,
         2340
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -250,7 +253,7 @@
         "resource": "contactList",
         "operation": "remove",
         "listId": 1,
-        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign6\"].json[\"id\"] }}"
       },
       "id": "393a9cff-3e32-4e1e-8d94-5e7f3f3352ad",
       "name": "ActiveCampaign1",
@@ -260,6 +263,7 @@
         -1260,
         2340
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -288,6 +292,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-09T22:45:05.000Z",
-  "versionId": "0e79a430-41e7-4652-b7da-f0ec0f702894"
+  "updatedAt": "2024-12-10T10:22:08.000Z",
+  "versionId": "ae47245d-e6e5-4998-a327-a280f78c3107"
 }

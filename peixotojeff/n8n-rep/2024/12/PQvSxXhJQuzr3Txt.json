@@ -228,7 +228,7 @@
       "parameters": {
         "resource": "contactList",
         "listId": 15,
-        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign6\"].json[\"id\"] }}"
       },
       "id": "d8709637-d033-482f-9f39-622035a8ec63",
       "name": "ActiveCampaign",
@@ -250,7 +250,7 @@
         "resource": "contactList",
         "operation": "remove",
         "listId": 1,
-        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign19\"].json[\"id\"] }}"
+        "contactId": "={{ $item(\"0\").$node[\"ActiveCampaign6\"].json[\"id\"] }}"
       },
       "id": "e2530b70-9c74-4dc2-ab54-3440c907d98c",
       "name": "ActiveCampaign1",
@@ -288,6 +288,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-09T22:45:11.000Z",
-  "versionId": "f420508e-fc5b-412a-b3d2-dfe30575c8fd"
+  "updatedAt": "2024-12-10T10:17:33.000Z",
+  "versionId": "efd2fa00-96ce-4f17-9446-8a597975cf31"
 }

@@ -1071,6 +1071,8 @@
       "parameters": {
         "operation": "formatDate",
         "date": "={{ $node[\"Nuvem\"].json[\"paid_at\"]}}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyy",
         "outputFieldName": "date",
         "options": {}
       },
@@ -1103,6 +1105,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-05T09:50:33.000Z",
-  "versionId": "a159131a-0047-422c-b73d-895b05bae4e5"
+  "updatedAt": "2024-12-10T22:46:42.000Z",
+  "versionId": "eea4aa11-af52-45d2-9d5f-ca31cbc40a18"
 }

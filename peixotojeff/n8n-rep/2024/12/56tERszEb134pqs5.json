@@ -208,6 +208,7 @@
         -1520,
         2580
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -255,6 +256,7 @@
         -1360,
         2580
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -277,6 +279,7 @@
         -1200,
         2580
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -298,6 +301,7 @@
         -1380,
         1740
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -345,6 +349,7 @@
         -1320,
         1900
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -366,6 +371,7 @@
         -1480,
         2080
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -413,6 +419,7 @@
         -1480,
         2280
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -569,6 +576,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-09T22:44:16.000Z",
-  "versionId": "76c8a069-a166-438d-a532-bd7f66776ec5"
+  "updatedAt": "2024-12-11T09:46:55.000Z",
+  "versionId": "c37f5d8f-6a4c-40d8-b4d5-524a77f8a397"
 }

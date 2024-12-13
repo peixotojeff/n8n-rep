@@ -251,6 +251,7 @@
         -1760,
         2180
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "ThCZCX6Bhtzew3g1",
@@ -297,6 +298,7 @@
         -1760,
         2360
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "ThCZCX6Bhtzew3g1",
@@ -318,6 +320,7 @@
         -1780,
         2560
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "ThCZCX6Bhtzew3g1",
@@ -364,6 +367,7 @@
         -1780,
         2740
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "ThCZCX6Bhtzew3g1",
@@ -408,6 +412,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-04T21:03:53.000Z",
-  "versionId": "dc9b0975-32b5-4cae-a120-b3fccddc011b"
+  "updatedAt": "2024-12-12T09:59:16.000Z",
+  "versionId": "1d426f0d-dae9-4957-9cdd-bedbe3a85804"
 }

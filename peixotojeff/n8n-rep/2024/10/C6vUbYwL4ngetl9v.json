@@ -242,6 +242,7 @@
         -2000,
         2260
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -289,6 +290,7 @@
         -1960,
         2420
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -336,6 +338,7 @@
         -1940,
         2560
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -399,6 +402,7 @@
         -1940,
         1940
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "1",
@@ -486,6 +490,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-05T09:32:45.000Z",
-  "versionId": "976d0565-79d6-4647-8565-e61a483a22ef"
+  "updatedAt": "2024-12-12T09:58:25.000Z",
+  "versionId": "98b33c15-dc9b-4ae1-8855-d6b1e3fd0290"
 }

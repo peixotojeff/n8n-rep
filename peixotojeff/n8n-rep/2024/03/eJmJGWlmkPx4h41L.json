@@ -663,6 +663,7 @@
         -1740,
         2600
       ],
+      "retryOnFail": true,
       "credentials": {
         "activeCampaignApi": {
           "id": "ThCZCX6Bhtzew3g1",
@@ -716,6 +717,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-04T21:03:13.000Z",
-  "versionId": "f1df1a78-861a-4b9e-a12d-faa3d9f4df58"
+  "updatedAt": "2024-12-17T02:55:47.000Z",
+  "versionId": "a2b045a6-63e6-4be0-a0a0-e6b2093fdfd1"
 }

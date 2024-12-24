@@ -174,11 +174,6 @@
         ]
       ]
     },
-    "Google Sheets": {
-      "main": [
-        []
-      ]
-    },
     "Date": {
       "main": [
         [
@@ -1073,7 +1068,7 @@
         "operation": "formatDate",
         "date": "={{ $node[\"Nuvem\"].json[\"paid_at\"]}}",
         "format": "custom",
-        "customFormat": "dd-MM-yyy",
+        "customFormat": "dd/MM/yyyy",
         "outputFieldName": "date",
         "options": {}
       },
@@ -1106,6 +1101,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-12T23:37:54.000Z",
-  "versionId": "271f2d96-42ee-468e-b00b-f0f6fcf9cd56"
+  "updatedAt": "2024-12-24T02:42:14.000Z",
+  "versionId": "aaa21bb5-4d72-490f-9422-2bd4dad589b6"
 }

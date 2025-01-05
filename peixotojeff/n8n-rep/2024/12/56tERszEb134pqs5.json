@@ -158,8 +158,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -2700,
-        2220
+        -2720,
+        2100
       ]
     },
     {
@@ -205,8 +205,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1520,
-        2580
+        -1500,
+        2460
       ],
       "retryOnFail": true,
       "credentials": {
@@ -230,8 +230,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1740,
-        2600
+        -1780,
+        2420
       ],
       "retryOnFail": true,
       "credentials": {
@@ -253,8 +253,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1360,
-        2580
+        -1340,
+        2460
       ],
       "retryOnFail": true,
       "credentials": {
@@ -276,8 +276,8 @@
       "type": "n8n-nodes-base.activeCampaign",
       "typeVersion": 1,
       "position": [
-        -1200,
-        2580
+        -1180,
+        2460
       ],
       "retryOnFail": true,
       "credentials": {
@@ -466,8 +466,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        -2080,
-        2640
+        -2020,
+        2400
       ]
     },
     {
@@ -481,8 +481,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -2880,
-        2220
+        -2900,
+        2100
       ],
       "webhookId": "b12d1cf0-64f5-45d1-9170-4aade0812c01"
     },
@@ -525,8 +525,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -2460,
-        2200
+        -2480,
+        2080
       ]
     },
     {
@@ -552,8 +552,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -1500,
-        2740
+        -1340,
+        2620
       ]
     }
   ],
@@ -576,6 +576,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-11T09:46:55.000Z",
-  "versionId": "c37f5d8f-6a4c-40d8-b4d5-524a77f8a397"
+  "updatedAt": "2025-01-04T17:42:10.000Z",
+  "versionId": "201f754c-573f-436e-87f0-9c3731afca61"
 }

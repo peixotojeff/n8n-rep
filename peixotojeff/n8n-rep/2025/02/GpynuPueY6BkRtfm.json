@@ -1,0 +1,323 @@
+{
+  "active": false,
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Set3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato3": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set3": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-07T03:37:46.155Z",
+  "id": "GpynuPueY6BkRtfm",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "(DOISEFF)NUVEM -> KLAVIYO (RECUSADOS) copy",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "2e321154-ea96-48b1-a334-fff1065445d5",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.nuvemshop.com.br/v1/5580703/orders/{{ $node[\"Code\"].json[\"id\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer b713da35e56a61c1c5e1e0494acb3ca80ffa657c"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (15828)"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "id": "5734573a-9417-4d28-ba57-2b5ea84544b6",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2cf0a14c-5405-47dd-8a96-8c1ae911dcb1",
+              "leftValue": "={{ $node[\"Nuvem\"].json[\"payment_status\"] }}",
+              "rightValue": "voided",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "77b39c1b-d80f-419e-814a-c541c45eebf0",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        380,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## KLAVIYO - COMPRE RECUSADA",
+        "height": 437.1851917228102,
+        "width": 1475.2605569569741
+      },
+      "id": "ee1290d0-c7d0-484d-9a1b-bebc75a48719",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/lists/{{ $node[\"Set3\"].json[\"List ID\"] }}/relationships/profiles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"type\": \"profile\",\n      \"id\": \"{{$json.body.data.id }}\"\n    }\n  ]\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "42a62ae9-089b-458b-8d28-96170ddfecfe",
+      "name": "Colocar na Lista6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        1300
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t  \"URL Carrinho Abandonado\": \"{{$('Set3').item.json[\"abandoned_checkout_url\"]}}\",\n\t\t  \"newKey-1\": \"New Value\",\n\t\t  \"newKey-2\": \"New Value\"\n\t\t},\n\t\t\"email\": \"{{ $('Set3').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set3').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set3').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "b3320854-0c15-4b61-bfff-94203c1ca68d",
+      "name": "Criar Contato3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        820,
+        1300
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "VdKA9h"
+            },
+            {
+              "name": "phone_number",
+              "value": "={{ $node[\"Nuvem\"].json[\"contact_phone\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f8381083-341a-4632-ae21-f305fb13e25c",
+      "name": "Set3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        600,
+        1300
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-02-07T03:20:51.976Z",
+      "updatedAt": "2025-02-07T03:20:51.976Z",
+      "id": "9RCQzOxrumcQbzDY",
+      "name": "DOISEFF"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-19T01:41:24.959Z",
+      "updatedAt": "2024-11-19T01:41:24.959Z",
+      "id": "UEXMANqvg7Q1MTMX",
+      "name": "Nuvem"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-02-07T03:38:19.000Z",
+  "versionId": "7f6b08bf-4e5d-4485-9d9e-6b56e7a80750"
+}

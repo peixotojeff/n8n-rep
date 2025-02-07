@@ -191,7 +191,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "(plakaacessorios )NUVEM -> KLAVIYO (PIX-BOLETO E PAGOS)",
+  "name": "(PLAKA)NUVEM -> KLAVIYO (PIX-BOLETO E PAGOS)",
   "nodes": [
     {
       "parameters": {
@@ -1101,6 +1101,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-24T02:42:14.000Z",
-  "versionId": "aaa21bb5-4d72-490f-9422-2bd4dad589b6"
+  "updatedAt": "2025-02-07T01:13:33.000Z",
+  "versionId": "c8fb0d13-b374-446f-85a3-7e4ca52408e0"
 }

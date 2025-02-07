@@ -1,0 +1,394 @@
+{
+  "active": false,
+  "connections": {
+    "Set3": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Set3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista2": {
+      "main": [
+        [
+          {
+            "node": "Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-07T03:20:53.314Z",
+  "id": "dF7B2pjYWTekDiEA",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "DOISEFF- NUVEM - KLAVIYO (Código de Rastreio) copy",
+  "nodes": [
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "Rq3zhC"
+            },
+            {
+              "name": "phone_number",
+              "value": "={{ $node[\"Nuvem\"].json[\"contact_phone\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+            },
+            {
+              "name": "URL Código de Rastreio",
+              "value": "=envia.com/rastreo?label={{$node[\"Filter\"].json[\"shipping_tracking_number\"]}}&cntry_code=br"
+            },
+            {
+              "name": "Código de Rastreio",
+              "value": "={{ $node[\"Nuvem\"].json[\"shipping_tracking_number\"] }}"
+            },
+            {
+              "name": "Data",
+              "value": "={{ $json[\"created_at\"] }}"
+            },
+            {
+              "name": "Total pago",
+              "value": "={{ $json.total }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "915a97c4-701b-4d1f-b21d-94ab072dff01",
+      "name": "Set3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        720,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.nuvemshop.com.br/v1/5580703/orders/{{ $item(\"0\").$node[\"Code\"].json[\"id\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer b713da35e56a61c1c5e1e0494acb3ca80ffa657c"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (15828)"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "63402aa0-1bfd-4542-8ec5-25594d618016",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        280,
+        540
+      ],
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9f218327-ac7e-4016-8b2b-7fbce2443281",
+              "leftValue": "={{ $json.shipping_tracking_number }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "147cddb4-e8a9-4f1b-b9c7-73048a93b23c",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        500,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "3707c62f-85f9-4366-97cc-f5c2c65c5145",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        100,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t  \"URL Código de Rastreio\": \"{{ $json[\"URL Código de Rastreio\"] }}\",\n\t\t  \"Código de Rastreio\": \"{{ $json[\"Código de Rastreio\"] }}\"\n        },\n\t\t\"email\": \"{{ $('Set3').item.json['email']}}\",\n\t\t\"phone_number\": \"+{{ $('Set3').item.json[\"phone_number\"] }}\",\n\t\t\"first_name\": \"{{$('Set3').item.json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "e9442e09-2ab8-48c1-b166-8200cd250584",
+      "name": "Criar Contato",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        920,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set3').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "a644e7d6-6d13-43d1-9466-1ac6c15941db",
+      "name": "Colocar na Lista2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"Código de Rastreio\"] }}\",\n        \"URL Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"URL Código de Rastreio\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Código de Rastreio\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set3\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Set3\"].json[\"Data\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "bd1c49f8-c07b-43e8-9234-43a4dbc16fe6",
+      "name": "Evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1300,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v0",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "guji68a2WMFO1TGt"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-02-07T03:20:51.976Z",
+      "updatedAt": "2025-02-07T03:20:51.976Z",
+      "id": "9RCQzOxrumcQbzDY",
+      "name": "DOISEFF"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.572Z",
+      "updatedAt": "2024-11-15T21:24:54.572Z",
+      "id": "bd9wkOJP5S5TNQ5C",
+      "name": "Shopify"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-02-07T03:31:56.000Z",
+  "versionId": "9206c503-2631-4227-989b-d5f09830d61f"
+}

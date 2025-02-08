@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Split In Batches": {
       "main": [
@@ -34,17 +34,6 @@
         ]
       ]
     },
-    "Nuvem": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Schedule Trigger": {
       "main": [
         [
@@ -71,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Colocar na Lista1",
+            "node": "Criar Evento",
             "type": "main",
             "index": 0
           }
@@ -89,7 +78,7 @@
         ]
       ]
     },
-    "Colocar na Lista1": {
+    "Nuvem": {
       "main": [
         [
           {
@@ -98,6 +87,11 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Criar Evento": {
+      "main": [
+        []
       ]
     }
   },
@@ -153,7 +147,7 @@
             },
             {
               "name": "List ID",
-              "value": "TNPebD"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -169,11 +163,11 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             },
             {
               "name": "abandoned_checkout_url",
-              "value": "=https://plakaacessorios.com/checkout/v3/next/{{ $json.id }}/{{ $json[\"token\"] }}"
+              "value": "=https:/doiseff.com.br/checkout/v3/next/{{ $json.id }}/{{ $json[\"token\"] }}"
             },
             {
               "name": "Data",
@@ -182,6 +176,14 @@
             {
               "name": "Total",
               "value": "={{ $json.total}}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $json.products[0].image.src}}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.products[0].name_without_variants }}"
             }
           ]
         },
@@ -228,7 +230,7 @@
             },
             {
               "name": "fields",
-              "value": "contact_name,contact_email,shipping_phone,id,token,abandoned_checkout_url,created_at,total"
+              "value": "contact_name,contact_email,shipping_phone,id,token,abandoned_checkout_url,created_at,total,products"
             }
           ]
         },
@@ -394,7 +396,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"abandoned_checkout_url\": \"{{ $('Set3').item.json['abandoned_checkout_url'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Carrinho Abandonado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $('Criar Contato3').item.json.body.data.attributes.email }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $('Set3').item.json.Total }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $('Set3').item.json.Data }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"abandoned_checkout_url\": \"{{ $('Set3').item.json['abandoned_checkout_url'] }}\",\n         \"Nome\": \"{{ $('Set3').item.json['First Name'] }}\",\n         \"Imagem\": \"{{ $('Set3').item.json['Imagem'] }}\",\n         \"Produto\": \"{{ $('Set3').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Carrinho Abandonado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $('Criar Contato3').item.json.body.data.attributes.email }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $('Set3').item.json.Total }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $('Set3').item.json.Data }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -404,7 +406,7 @@
         }
       },
       "id": "2942b030-a5f8-4844-9a5f-f76fc64e96a9",
-      "name": "Colocar na Lista1",
+      "name": "Criar Evento",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
@@ -452,6 +454,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T03:36:36.000Z",
-  "versionId": "ce09141b-7d69-4df6-af19-38721b86858c"
+  "updatedAt": "2025-02-07T23:06:49.000Z",
+  "versionId": "e6473ab4-753c-40b7-b2e6-09877aab3f76"
 }

@@ -1,22 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Code": {
       "main": [
         [
           {
             "node": "Nuvem",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Nuvem": {
-      "main": [
-        [
-          {
-            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -55,6 +44,17 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-07T03:37:46.155Z",
@@ -62,7 +62,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "(DOISEFF)NUVEM -> KLAVIYO (RECUSADOS) copy",
+  "name": "(DOISEFF)NUVEM -> KLAVIYO (RECUSADOS)",
   "nodes": [
     {
       "parameters": {
@@ -287,6 +287,22 @@
         600,
         1300
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "67219ba0-4621-48dc-80c7-0c85f3afc076",
+        "options": {}
+      },
+      "id": "d392cd8e-304a-40fa-8d01-63aa939d510d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        1300
+      ],
+      "webhookId": "67219ba0-4621-48dc-80c7-0c85f3afc076"
     }
   ],
   "pinData": {},
@@ -318,6 +334,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T03:38:19.000Z",
-  "versionId": "7f6b08bf-4e5d-4485-9d9e-6b56e7a80750"
+  "updatedAt": "2025-02-07T08:15:26.000Z",
+  "versionId": "ee7adbbf-08fb-4162-b29f-e849673315c5"
 }

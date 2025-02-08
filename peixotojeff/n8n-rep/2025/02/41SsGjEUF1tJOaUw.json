@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Switch": {
       "main": [
@@ -46,17 +46,6 @@
         [
           {
             "node": "Criar Contato",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Nuvem": {
-      "main": [
-        [
-          {
-            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -1068,18 +1057,18 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "8bdd441f-f7e4-4673-bff7-8412d530b5a9",
+        "path": "771ef4be-98a5-46d6-a9fd-44cc523cfe9a",
         "options": {}
       },
-      "id": "a38404e2-26e1-49d2-83e8-0f25111f9c8b",
+      "id": "35730004-d643-403b-8f7c-9c52b1cb8c48",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
+      "typeVersion": 2,
       "position": [
-        -1080,
+        -1160,
         480
       ],
-      "webhookId": "8bdd441f-f7e4-4673-bff7-8412d530b5a9"
+      "webhookId": "771ef4be-98a5-46d6-a9fd-44cc523cfe9a"
     }
   ],
   "pinData": {},
@@ -1107,6 +1096,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T03:20:12.000Z",
-  "versionId": "bb0c8bd6-5ba0-497d-9d51-7213f80c7f67"
+  "updatedAt": "2025-02-07T08:15:25.000Z",
+  "versionId": "1254e876-ae9c-449d-a851-600e5d22a49e"
 }

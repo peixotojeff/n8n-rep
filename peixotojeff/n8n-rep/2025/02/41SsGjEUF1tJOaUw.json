@@ -145,7 +145,7 @@
       "main": [
         [
           {
-            "node": "Evento2",
+            "node": "Criar evento",
             "type": "main",
             "index": 0
           }
@@ -157,6 +157,17 @@
         [
           {
             "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -231,8 +242,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        540,
-        20
+        780,
+        40
       ]
     },
     {
@@ -246,7 +257,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        540,
+        700,
         580
       ]
     },
@@ -281,7 +292,7 @@
             },
             {
               "name": "List ID",
-              "value": "X7Cucw"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -301,7 +312,7 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             },
             {
               "name": "Numero do pedido",
@@ -310,6 +321,14 @@
             {
               "name": "Total pago",
               "value": "=R$ {{ $json.total.replace('.', ',') }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"name_without_variants\"] }}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"image\"][\"src\"] }}"
             }
           ]
         },
@@ -335,7 +354,7 @@
             },
             {
               "name": "List ID",
-              "value": "RzFz2D"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -355,7 +374,7 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             },
             {
               "name": "Numero do pedido",
@@ -364,6 +383,14 @@
             {
               "name": "Total pago",
               "value": "=R$ {{ $json.total.replace('.', ',') }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"name_without_variants\"] }}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"image\"][\"src\"] }}"
             }
           ]
         },
@@ -421,7 +448,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        500,
+        540,
         1220
       ]
     },
@@ -436,7 +463,7 @@
             },
             {
               "name": "List ID",
-              "value": "TvNHfQ"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -452,7 +479,7 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             },
             {
               "name": "Numero do pedido",
@@ -473,6 +500,14 @@
             {
               "name": "UTM Campaign",
               "value": "={{ $node[\"Nuvem\"].json[\"customer_visit\"][\"utm_parameters\"][\"utm_campaign\"] }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"name_without_variants\"] }}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"image\"][\"src\"] }}"
             }
           ]
         },
@@ -616,7 +651,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1200,
+        1000,
         1300
       ],
       "alwaysOutputData": true,
@@ -747,7 +782,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1400,
+        1200,
         1300
       ],
       "alwaysOutputData": true,
@@ -781,7 +816,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductID\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido Pago\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set2').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set2').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set2').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido Pago\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -795,7 +830,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1580,
+        1380,
         1300
       ],
       "alwaysOutputData": true,
@@ -829,7 +864,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductID\": \"{{ $node[\"Set\"].json[\"Numero do pedido\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Boleto Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"total\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Boleto Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"total\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -845,54 +880,6 @@
       "position": [
         1340,
         680
-      ],
-      "alwaysOutputData": true,
-      "continueOnFail": true,
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://a.klaviyo.com/api/events",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "=Klaviyo-API-Key {{ $('Set1').item.json[\"TOKEN\"] }}"
-            },
-            {
-              "name": "accept",
-              "value": "application/json"
-            },
-            {
-              "name": "revision",
-              "value": "2024-10-15"
-            },
-            {
-              "name": "content-type",
-              "value": "=application/json "
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductID\": \"{{ $node[\"Set1\"].json[\"Numero do pedido\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pix Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set1\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"total\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
-        "options": {
-          "redirect": {
-            "redirect": {
-              "followRedirects": true
-            }
-          }
-        }
-      },
-      "id": "8d23de40-915a-47c3-9d9d-4bee78a3a959",
-      "name": "Evento2",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        1360,
-        160
       ],
       "alwaysOutputData": true,
       "continueOnFail": true,
@@ -1034,7 +1021,8 @@
           "id": "aHfauSViH63CvmHf",
           "name": "Google Sheets Reconverte"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1052,7 +1040,56 @@
         1300
       ],
       "id": "efb9ea81-5678-4787-b307-26dd9dd91ab9",
-      "name": "Date"
+      "name": "Date",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set1').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set1\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set1').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set1').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set1').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pix Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set1\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"total\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "8d23de40-915a-47c3-9d9d-4bee78a3a959",
+      "name": "Criar evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1360,
+        160
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -1083,6 +1120,12 @@
   "staticData": null,
   "tags": [
     {
+      "createdAt": "2025-02-07T03:20:51.976Z",
+      "updatedAt": "2025-02-07T03:20:51.976Z",
+      "id": "9RCQzOxrumcQbzDY",
+      "name": "DOISEFF"
+    },
+    {
       "createdAt": "2024-11-15T21:24:54.561Z",
       "updatedAt": "2024-11-15T21:24:54.561Z",
       "id": "MB3EUpHs6Gf1Hxl8",
@@ -1096,6 +1139,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T08:15:25.000Z",
-  "versionId": "1254e876-ae9c-449d-a851-600e5d22a49e"
+  "updatedAt": "2025-02-08T14:34:45.000Z",
+  "versionId": "a3fccbd6-4fa1-4b19-9d14-111acc7a14da"
 }

@@ -91,7 +91,13 @@
     },
     "Criar Evento": {
       "main": [
-        []
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -454,6 +460,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T23:06:49.000Z",
-  "versionId": "e6473ab4-753c-40b7-b2e6-09877aab3f76"
+  "updatedAt": "2025-02-08T09:40:02.000Z",
+  "versionId": "d00f38a5-6647-4fdf-942a-0ed0ed23f67c"
 }

@@ -55,6 +55,17 @@
           }
         ]
       ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-07T03:37:46.155Z",
@@ -153,8 +164,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -180,
-        1120
+        -280,
+        1140
       ]
     },
     {
@@ -257,7 +268,7 @@
             },
             {
               "name": "List ID",
-              "value": "VdKA9h"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -273,7 +284,7 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             }
           ]
         },
@@ -334,6 +345,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T08:15:26.000Z",
-  "versionId": "ee7adbbf-08fb-4162-b29f-e849673315c5"
+  "updatedAt": "2025-02-08T09:25:30.000Z",
+  "versionId": "6bdc48a9-6ff0-424e-81f1-3e8a1c243e2a"
 }

@@ -23,11 +23,6 @@
         ]
       ]
     },
-    "Filter": {
-      "main": [
-        []
-      ]
-    },
     "Code": {
       "main": [
         [
@@ -71,6 +66,17 @@
           }
         ]
       ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Set3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-07T03:20:53.314Z",
@@ -78,7 +84,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "DOISEFF- NUVEM - KLAVIYO (Código de Rastreio) copy",
+  "name": "DOISEFF- NUVEM - KLAVIYO (Código de Rastreio)",
   "nodes": [
     {
       "parameters": {
@@ -91,7 +97,7 @@
             },
             {
               "name": "List ID",
-              "value": "Rq3zhC"
+              "value": "TE3nmw"
             },
             {
               "name": "phone_number",
@@ -107,11 +113,11 @@
             },
             {
               "name": "TOKEN",
-              "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
             },
             {
               "name": "URL Código de Rastreio",
-              "value": "=envia.com/rastreo?label={{$node[\"Filter\"].json[\"shipping_tracking_number\"]}}&cntry_code=br"
+              "value": "=https://www.doiseff.com.br/rastreio-do-pedido/"
             },
             {
               "name": "Código de Rastreio",
@@ -410,6 +416,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T08:14:59.000Z",
-  "versionId": "4ae0ad2f-693c-4a6e-867e-c90cd665d01f"
+  "updatedAt": "2025-02-09T15:21:30.000Z",
+  "versionId": "892ee456-29a9-4fa6-ad94-e5b6272a775e"
 }

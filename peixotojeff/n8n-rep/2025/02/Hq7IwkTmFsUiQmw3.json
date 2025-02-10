@@ -106,7 +106,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "DOISEFF- NUVEM - KLAVIYO (Carrinho Abandonado) teste copy",
+  "name": "DOISEFF- NUVEM - KLAVIYO (Carrinho Abandonado)",
   "nodes": [
     {
       "parameters": {
@@ -460,6 +460,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-08T09:40:02.000Z",
-  "versionId": "d00f38a5-6647-4fdf-942a-0ed0ed23f67c"
+  "updatedAt": "2025-02-09T15:22:26.000Z",
+  "versionId": "a1d28984-da58-4533-9f9d-c810f4ead292"
 }

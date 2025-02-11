@@ -117,7 +117,8 @@
       "position": [
         160,
         1300
-      ]
+      ],
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -339,6 +340,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-24T01:57:32.000Z",
-  "versionId": "a49e77ea-71b7-4e22-bbb9-409a7c70f250"
+  "updatedAt": "2025-02-10T23:45:36.000Z",
+  "versionId": "fbae7360-b067-40d6-8640-7ea633e07e63"
 }

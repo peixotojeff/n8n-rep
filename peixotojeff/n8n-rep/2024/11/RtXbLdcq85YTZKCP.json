@@ -34,17 +34,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Criar Contato3": {
       "main": [
         [
@@ -56,11 +45,33 @@
         ]
       ]
     },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Set3": {
       "main": [
         [
           {
             "node": "Criar Contato3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista6": {
+      "main": [
+        [
+          {
+            "node": "Evento",
             "type": "main",
             "index": 0
           }
@@ -156,22 +167,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "recusado",
-        "options": {}
-      },
-      "id": "d5eb92b7-1911-4c39-9683-cac5068c2acb",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        -220,
-        1300
-      ],
-      "webhookId": "7fc95386-11b1-4d04-8819-f6d4d9fe8e08"
-    },
-    {
-      "parameters": {
         "content": "## KLAVIYO - COMPRE RECUSADA",
         "height": 437.1851917228102,
         "width": 1475.2605569569741
@@ -184,50 +179,6 @@
         -180,
         1120
       ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://a.klaviyo.com/api/lists/{{ $node[\"Set3\"].json[\"List ID\"] }}/relationships/profiles",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
-            },
-            {
-              "name": "accept",
-              "value": "application/json"
-            },
-            {
-              "name": "revision",
-              "value": "2024-10-15"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": [\n    {\n      \"type\": \"profile\",\n      \"id\": \"{{$json.body.data.id }}\"\n    }\n  ]\n}",
-        "options": {
-          "redirect": {
-            "redirect": {
-              "followRedirects": true
-            }
-          }
-        }
-      },
-      "id": "962cd274-4b9f-46e8-8b8a-4a6df45c3108",
-      "name": "Colocar na Lista6",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        1040,
-        1300
-      ],
-      "alwaysOutputData": true,
-      "continueOnFail": true,
-      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -276,6 +227,22 @@
     },
     {
       "parameters": {
+        "httpMethod": "POST",
+        "path": "recusado",
+        "options": {}
+      },
+      "id": "d5eb92b7-1911-4c39-9683-cac5068c2acb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        1300
+      ],
+      "webhookId": "7fc95386-11b1-4d04-8819-f6d4d9fe8e08"
+    },
+    {
+      "parameters": {
         "keepOnlySet": true,
         "values": {
           "string": [
@@ -302,12 +269,32 @@
             {
               "name": "TOKEN",
               "value": "pk_5487b650021d53b0fa9028fd56884ead2d"
+            },
+            {
+              "name": "Total",
+              "value": "={{ $json.subtotal }}"
+            },
+            {
+              "name": "Data",
+              "value": "={{ $json.customer.created_at }}"
+            },
+            {
+              "name": "Numero do pedido",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $json.products[0].name_without_variants }}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $json.products[0].image.src }}"
             }
           ]
         },
         "options": {}
       },
-      "id": "b8fa9c92-3d2e-42bd-8700-d24248c988b7",
+      "id": "f9a1676f-5cd9-463d-aa05-81e7b294fc5a",
       "name": "Set3",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
@@ -315,6 +302,98 @@
         600,
         1300
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/lists/{{ $node[\"Set3\"].json[\"List ID\"] }}/relationships/profiles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": [\n    {\n      \"type\": \"profile\",\n      \"id\": \"{{$json.body.data.id }}\"\n    }\n  ]\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "962cd274-4b9f-46e8-8b8a-4a6df45c3108",
+      "name": "Colocar na Lista6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        1300
+      ],
+      "alwaysOutputData": false,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set3').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set3\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set3').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set3').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set3').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Cartão recusado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set3\"].json[\"Total\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Filter\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "c80c6b37-8043-48ec-809a-182e811730b4",
+      "name": "Evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1220,
+        1300
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
     }
   ],
   "pinData": {},
@@ -340,6 +419,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-10T23:45:36.000Z",
-  "versionId": "fbae7360-b067-40d6-8640-7ea633e07e63"
+  "updatedAt": "2025-02-11T20:29:46.000Z",
+  "versionId": "a0ce1ef5-7292-4d9d-9c98-187811fc4e1e"
 }

@@ -816,7 +816,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set2').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set2').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set2').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido Pago\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set2').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set2').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set2').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Compra Aprovada\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"created_at\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -1139,6 +1139,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-08T14:34:45.000Z",
-  "versionId": "a3fccbd6-4fa1-4b19-9d14-111acc7a14da"
+  "updatedAt": "2025-02-11T19:35:52.000Z",
+  "versionId": "28398426-e4d5-4564-9487-5fe17bb2e6a1"
 }

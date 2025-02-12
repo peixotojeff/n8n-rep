@@ -341,7 +341,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"Código de Rastreio\"] }}\",\n        \"URL Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"URL Código de Rastreio\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Código de Rastreio\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set3\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Set3\"].json[\"Data\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"Código de Rastreio\"] }}\",\n        \"URL Código de Rastreio\": \"{{ $node[\"Set3\"].json[\"URL Código de Rastreio\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido enviado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set3\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set3\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Set3\"].json[\"Data\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -416,6 +416,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-09T15:21:30.000Z",
-  "versionId": "892ee456-29a9-4fa6-ad94-e5b6272a775e"
+  "updatedAt": "2025-02-11T19:41:43.000Z",
+  "versionId": "19691552-ec67-4365-adfd-72d07c92375d"
 }

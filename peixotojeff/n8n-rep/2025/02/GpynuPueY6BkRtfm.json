@@ -175,8 +175,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -540,
-        780
+        -260,
+        1060
       ]
     },
     {
@@ -424,6 +424,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-11T20:26:50.000Z",
-  "versionId": "9382dcce-79aa-411d-bceb-cdddbbffd5ef"
+  "updatedAt": "2025-02-17T02:26:10.000Z",
+  "versionId": "4e73fc06-5a68-4128-95e6-edf41ee5cbf8"
 }

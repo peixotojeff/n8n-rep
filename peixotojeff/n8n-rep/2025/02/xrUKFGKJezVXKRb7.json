@@ -1,0 +1,445 @@
+{
+  "active": false,
+  "connections": {
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "Criar Contato1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criar Contato1": {
+      "main": [
+        [
+          {
+            "node": "Colocar na Lista2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocar na Lista2": {
+      "main": [
+        [
+          {
+            "node": "Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-17T13:11:01.212Z",
+  "id": "xrUKFGKJezVXKRb7",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "DOISEFF- NUVEM - KLAVIYO (Pedidos Pagos)",
+  "nodes": [
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "22776485-de59-4d7f-bf0b-e8e4b9369163",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 7
+            }
+          ]
+        }
+      },
+      "id": "6119ae31-0432-4768-9d1d-fc27475518ce",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -760,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.nuvemshop.com.br/v1/5580703/orders",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "payment_status",
+              "value": "paid"
+            },
+            {
+              "name": "created_at_max",
+              "value": "={{ $json.formattedDate }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer b713da35e56a61c1c5e1e0494acb3ca80ffa657c"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (15828)"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "4b828398-f8de-4875-bebf-2642ec5561f1",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -320,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.timestamp }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "id": "0f0eb4f2-3fac-4884-a34c-9caa776cabf6",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "email",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_email\"] }}"
+            },
+            {
+              "name": "List ID",
+              "value": "TE3nmw"
+            },
+            {
+              "name": "phone_number",
+              "value": "={{ $node[\"Nuvem\"].json[\"contact_phone\"] }}"
+            },
+            {
+              "name": "source",
+              "value": "n8n"
+            },
+            {
+              "name": "First Name",
+              "value": "={{$node[\"Nuvem\"].json[\"contact_name\"] }}"
+            },
+            {
+              "name": "TOKEN",
+              "value": "pk_4a456728a552d294ad8292eefae3fb157d"
+            },
+            {
+              "name": "Numero do pedido",
+              "value": "={{ $node[\"Nuvem\"].json[\"number\"] }}"
+            },
+            {
+              "name": "Total pago",
+              "value": "={{ $node[\"Nuvem\"].json[\"total\"] }}"
+            },
+            {
+              "name": "UTM Source",
+              "value": "={{ $node[\"Nuvem\"].json[\"customer_visit\"][\"utm_parameters\"][\"utm_source\"] }}"
+            },
+            {
+              "name": "UTM Medium",
+              "value": "={{ $node[\"Nuvem\"].json[\"customer_visit\"][\"utm_parameters\"][\"utm_medium\"] }}"
+            },
+            {
+              "name": "UTM Campaign",
+              "value": "={{ $node[\"Nuvem\"].json[\"customer_visit\"][\"utm_parameters\"][\"utm_campaign\"] }}"
+            },
+            {
+              "name": "Produto",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"name_without_variants\"] }}"
+            },
+            {
+              "name": "Imagem",
+              "value": "={{ $node[\"Nuvem\"].json[\"products\"][\"0\"][\"image\"][\"src\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d51c499d-2ca6-4ecf-b7dc-a063bab9d33d",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        220,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-import",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $json.TOKEN }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\t\"data\": {\n\t  \"type\": \"profile\",\n\t  \"attributes\": {\n\t\t\"properties\": {\n\t\t\"Numero do pedido\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n\"Total pago\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n\"UTM Source\": \"{{$node[\"Set2\"].json[\"UTM Source\"] }}\",\n\"UTM Campaign\": \"{{$node[\"Set2\"].json[\"UTM Campaign\"] }}\",\n\"UTM Medium\": \"{{$node[\"Set2\"].json[\"UTM Medium\"] }}\"    \t\n\t\t},\n\t\t\"email\": \"{{ $json.email }}\",\n\t\t\"phone_number\": \"+{{ $json.phone_number }}\",\n\t\t\"first_name\": \"{{ $json[\"First Name\"] }}\"\n\t  }\n\t}\n  }",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "8f3589c3-98f0-45b4-bd09-1052a9f050b8",
+      "name": "Criar Contato1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        440,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set2').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {\n        \"type\": \"profile-subscription-bulk-create-job\",\n        \"attributes\": {\n            \"profiles\": {\n                \"data\": [\n                    {\n                        \"type\": \"profile\",\n                        \"id\": \"{{ $json.body.data.id }}\",\n                        \"attributes\": {\n                            \"email\": \"{{ $json.body.data.attributes.email }}\",\n                            \"phone_number\": \"{{ $json.body.data.attributes.phone_number }}\",\n                            \"subscriptions\": {\n                                \"email\": {\n                                    \"marketing\": {\n                                        \"consent\": \"SUBSCRIBED\"\n                                    }\n                                }\n                            }\n                        }\n                    }\n                ]\n            }\n        },\n        \"relationships\": {\n            \"list\": {\n                \"data\": {\n                    \"type\": \"list\",\n                    \"id\": \"{{ $('Set2').item.json['List ID'] }}\"\n                }\n            }\n        }\n    }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "1e6ae365-4b43-44d0-9f43-c2ade133bfe3",
+      "name": "Colocar na Lista2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        640,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key {{ $('Set2').item.json[\"TOKEN\"] }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "content-type",
+              "value": "=application/json "
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"PedidoID\": \"{{ $node[\"Set2\"].json[\"Numero do pedido\"] }}\",\n        \"Nome\": \"{{ $('Set2').item.json['First Name'] }}\",\n        \"Imagem\": \"{{ $('Set2').item.json['Imagem'] }}\",\n        \"Produto\": \"{{ $('Set2').item.json['Produto'] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pedido Pago\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set2\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Set2\"].json[\"Total pago\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": {{ $('Split In Batches').item.json.created_at }}\"\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "3cee41ed-641e-46fd-8a7f-ad8c5cadb3db",
+      "name": "Evento",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        820,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v0",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-02-07T03:20:51.976Z",
+      "updatedAt": "2025-02-07T03:20:51.976Z",
+      "id": "9RCQzOxrumcQbzDY",
+      "name": "DOISEFF"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.561Z",
+      "updatedAt": "2024-11-15T21:24:54.561Z",
+      "id": "MB3EUpHs6Gf1Hxl8",
+      "name": "Klaviyo"
+    },
+    {
+      "createdAt": "2024-11-15T21:24:54.572Z",
+      "updatedAt": "2024-11-15T21:24:54.572Z",
+      "id": "bd9wkOJP5S5TNQ5C",
+      "name": "Shopify"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-02-17T13:21:37.000Z",
+  "versionId": "37c87ae8-7fbf-420f-88e4-1c0c17b68ea2"
+}

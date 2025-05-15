@@ -1,0 +1,40 @@
+{
+  "active": true,
+  "connections": {},
+  "createdAt": "2025-05-14T12:48:51.027Z",
+  "id": "4kaSp7CTg83ElttD",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "273a0358-0424-427d-9572-285f8a1986c4",
+        "options": {}
+      },
+      "id": "5b85917f-40d2-4792-b003-027b438a479a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "273a0358-0424-427d-9572-285f8a1986c4"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-14T12:48:53.000Z",
+  "versionId": "5313bced-73a5-4c41-a140-5ad518423b7d"
+}

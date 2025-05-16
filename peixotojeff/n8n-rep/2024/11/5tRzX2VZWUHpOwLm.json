@@ -12,17 +12,6 @@
         ]
       ]
     },
-    "Nuvem": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Filter": {
       "main": [
         [
@@ -38,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Nuvem",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -72,6 +61,50 @@
         [
           {
             "node": "Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nuvem": {
+      "main": [
+        [
+          {
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -140,43 +173,9 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        720,
+        940,
         540
       ]
-    },
-    {
-      "parameters": {
-        "url": "=https://api.nuvemshop.com.br/v1/1447473/orders/{{ $item(\"0\").$node[\"Code\"].json[\"id\"] }}",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authentication",
-              "value": "bearer 885a32d5ade6aec1035af161e8e6bcd90ebaaaf1"
-            },
-            {
-              "name": "User-Agent",
-              "value": "Your App Name (14552)"
-            }
-          ]
-        },
-        "options": {
-          "response": {
-            "response": {
-              "responseFormat": "json"
-            }
-          }
-        }
-      },
-      "id": "2148ec8e-bb43-4ac7-8bd3-928a98d4fa60",
-      "name": "Nuvem",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [
-        280,
-        540
-      ],
-      "retryOnFail": true
     },
     {
       "parameters": {
@@ -208,7 +207,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        500,
+        720,
         540
       ]
     },
@@ -221,7 +220,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        100,
+        -480,
         540
       ]
     },
@@ -236,7 +235,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -80,
+        -660,
         540
       ],
       "webhookId": "f5add437-db2c-4189-a7c1-81a2a7246b82"
@@ -280,7 +279,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        920,
+        1140,
         540
       ],
       "alwaysOutputData": true,
@@ -323,7 +322,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1120,
+        1340,
         540
       ],
       "alwaysOutputData": true,
@@ -371,12 +370,86 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1300,
+        1520,
         540
       ],
       "alwaysOutputData": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "id": "2c0d0e9d-33b6-4386-bc48-505ec790465a",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        540
+      ],
+      "webhookId": "0cb53359-d3f5-4c53-8ea2-3787ddc8e536"
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "id": "1020bbbe-4f97-4aa4-a41b-f653f46e1d7d",
+      "name": "Wait1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        540
+      ],
+      "webhookId": "25857514-4f0a-4f85-9e3e-a666c972c283"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "9c854aa6-1882-469f-909d-f9ed03e5a58f",
+      "name": "Wait2",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        540
+      ],
+      "webhookId": "ef1269e4-926c-4e44-a60a-cd26b487b22d"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.nuvemshop.com.br/v1/1447473/orders/{{ $item(\"0\").$node[\"Code\"].json[\"id\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authentication",
+              "value": "bearer 885a32d5ade6aec1035af161e8e6bcd90ebaaaf1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Your App Name (14552)"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "4b850b06-3220-4577-8dce-5c19038dff67",
+      "name": "Nuvem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        500,
+        540
+      ],
+      "retryOnFail": true
     }
   ],
   "pinData": {},
@@ -416,6 +489,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-12T09:56:41.000Z",
-  "versionId": "f3f7d543-e71c-4692-b35d-2bd6c1548861"
+  "updatedAt": "2025-05-15T23:43:35.000Z",
+  "versionId": "c3093161-097d-4cd2-8407-2b0f8b08901d"
 }

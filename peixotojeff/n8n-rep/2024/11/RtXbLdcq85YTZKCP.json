@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Nuvem",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
@@ -77,6 +77,17 @@
           }
         ]
       ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Nuvem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-11-19T01:41:26.333Z",
@@ -126,7 +137,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        160,
+        380,
         1300
       ],
       "retryOnFail": true
@@ -161,7 +172,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        380,
+        600,
         1300
       ]
     },
@@ -219,7 +230,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        820,
+        1040,
         1300
       ],
       "alwaysOutputData": true,
@@ -299,7 +310,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        600,
+        820,
         1300
       ]
     },
@@ -340,7 +351,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1040,
+        1260,
         1300
       ],
       "alwaysOutputData": false,
@@ -388,12 +399,24 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1220,
+        1440,
         1300
       ],
       "alwaysOutputData": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "id": "5bb51011-eb06-4cfd-9bfd-f110ef2f3941",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        1300
+      ],
+      "webhookId": "2935f792-cccb-4b57-bdf3-6494d178e246"
     }
   ],
   "pinData": {},
@@ -419,6 +442,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-11T20:29:46.000Z",
-  "versionId": "a0ce1ef5-7292-4d9d-9c98-187811fc4e1e"
+  "updatedAt": "2025-05-15T23:58:34.000Z",
+  "versionId": "c024c080-03ee-4d87-8f19-dfc4e78d06d1"
 }

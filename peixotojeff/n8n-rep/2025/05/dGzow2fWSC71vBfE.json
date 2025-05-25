@@ -1,0 +1,65 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-25T02:55:15.953Z",
+  "id": "dGzow2fWSC71vBfE",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upsell-recuperacao",
+        "options": {}
+      },
+      "id": "4b496e31-7380-4496-8d6f-a70810cc94dd",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "ce0807c3-de87-4144-9750-9588ec643757"
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log($node[\"Webhook\"].json);\nreturn [{ json: $node[\"Webhook\"].json }];"
+      },
+      "id": "1df22b14-a2f6-4247-acfc-af328685b72c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        540
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-25T04:24:40.000Z",
+  "versionId": "f10dff02-cc05-4cd7-bf18-597a3f47c2af"
+}

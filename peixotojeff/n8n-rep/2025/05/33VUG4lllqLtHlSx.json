@@ -1,0 +1,40 @@
+{
+  "active": true,
+  "connections": {},
+  "createdAt": "2025-05-25T23:16:37.873Z",
+  "id": "33VUG4lllqLtHlSx",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "teste depoloy",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upsell-recuperacao",
+        "options": {}
+      },
+      "id": "62b43898-f7f5-41f7-a2ae-30390a810bf6",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "3a9d5bd5-f4d2-4ead-87a6-b6a924eee773"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-25T23:16:42.000Z",
+  "versionId": "cedb6b55-aff9-471a-a38e-484a6bed4824"
+}

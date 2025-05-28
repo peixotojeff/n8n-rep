@@ -1,0 +1,221 @@
+{
+  "active": false,
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-28T00:40:36.470Z",
+  "id": "tkA4S8Ux890ttU9r",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PAYT OFERTA UPSELL",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "25f38400-57cd-4cd0-b116-9b39843324bd",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "4745f0ad-756a-41fd-8aef-87bc8086004d",
+              "leftValue": "={{ $json.customer.code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c25d445d-ba93-4d02-93c8-50c9361369e7",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1cd6f2f6-4702-4133-ae35-31b3e6d83c58",
+              "name": "clienteId",
+              "value": "={{ $json.customer.code }}",
+              "type": "string"
+            },
+            {
+              "id": "1b58d44e-b5ce-45b5-96c3-54e269271698",
+              "name": "productid",
+              "value": "={{ $json.product.code }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "36639086-b2ea-4930-8f3c-d76cbb8cc591",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1780,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE",
+          "mode": "list",
+          "cachedResultName": "VENDAS PAYT flynowagencialtda@gmail.com",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "clientid",
+              "displayName": "clientid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "15279974-1546-4b63-861c-3002378ad9fd",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [
+        2040,
+        540
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "X45h2pbnOX9dAgcA",
+          "name": "Google Sheets peixotomidias@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "oferta-upsell",
+        "options": {}
+      },
+      "id": "848550a3-2fbd-4d81-8915-3b9e42819db9",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "312ad55c-13d1-456e-8581-3b7465742469"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-05-28T00:43:01.000Z",
+  "versionId": "3a79abab-0d8e-4acd-a604-17063728954f"
+}

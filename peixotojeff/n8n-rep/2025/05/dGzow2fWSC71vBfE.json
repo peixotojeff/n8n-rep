@@ -18,24 +18,8 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow 2",
+  "name": "payt klaviyo",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "upsell-recuperacao",
-        "options": {}
-      },
-      "id": "4b496e31-7380-4496-8d6f-a70810cc94dd",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        1120,
-        540
-      ],
-      "webhookId": "ce0807c3-de87-4144-9750-9588ec643757"
-    },
     {
       "parameters": {
         "jsCode": "console.log($node[\"Webhook\"].json);\nreturn [{ json: $node[\"Webhook\"].json }];"
@@ -48,6 +32,22 @@
         1340,
         540
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "payt-recuperacao",
+        "options": {}
+      },
+      "id": "4b496e31-7380-4496-8d6f-a70810cc94dd",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "ce0807c3-de87-4144-9750-9588ec643757"
     }
   ],
   "pinData": {},
@@ -60,6 +60,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-25T04:24:40.000Z",
-  "versionId": "f10dff02-cc05-4cd7-bf18-597a3f47c2af"
+  "updatedAt": "2025-05-27T17:52:57.000Z",
+  "versionId": "19150e74-757e-431a-aa5a-f2d49e4001ea"
 }

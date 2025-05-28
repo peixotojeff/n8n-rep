@@ -1,11 +1,62 @@
 {
   "active": true,
   "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Webhook": {
       "main": [
         [
           {
             "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Sheets1",
             "type": "main",
             "index": 0
           }
@@ -18,8 +69,150 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "teste depoloy",
+  "name": "PAYT COMPRA APROVADA/CARRINHO DB (DB)",
   "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+      },
+      "id": "0611d355-10f4-4379-b1cf-3ed3b404593c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "4745f0ad-756a-41fd-8aef-87bc8086004d",
+              "leftValue": "={{ $json.customer.code }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3157234a-7365-4347-803f-d47f66e8d54f",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1cd6f2f6-4702-4133-ae35-31b3e6d83c58",
+              "name": "clienteId",
+              "value": "={{ $json.customer.code }}",
+              "type": "string"
+            },
+            {
+              "id": "1b58d44e-b5ce-45b5-96c3-54e269271698",
+              "name": "productid",
+              "value": "={{ $json.product.code }}",
+              "type": "string"
+            },
+            {
+              "id": "26c84841-1754-4770-864e-441c5c04d20d",
+              "name": "status",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5590fdff-4ff4-4691-b1ac-7040a1b099f1",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1780,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE",
+          "mode": "list",
+          "cachedResultName": "VENDAS PAYT flynowagencialtda@gmail.com",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "PAGO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "clientid",
+              "displayName": "clientid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "id": "dcb59bb3-0997-465b-920f-fe0c64b4c373",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [
+        2320,
+        320
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "X45h2pbnOX9dAgcA",
+          "name": "Google Sheets peixotomidias@gmail.com"
+        }
+      }
+    },
     {
       "parameters": {
         "httpMethod": "POST",
@@ -38,14 +231,121 @@
     },
     {
       "parameters": {
-        "jsCode": "return typeof $node[\"Webhook\"].json[\"body\"] == 'string' ? JSON.parse($node[\"Webhook\"].json[\"body\"]) : $node[\"Webhook\"].json[\"body\"]"
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE",
+          "mode": "list",
+          "cachedResultName": "VENDAS PAYT flynowagencialtda@gmail.com",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1147749967,
+          "mode": "list",
+          "cachedResultName": "ABANDONADO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit#gid=1147749967"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "clienteId",
+              "displayName": "clienteId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "productid",
+              "displayName": "productid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
       },
-      "id": "0611d355-10f4-4379-b1cf-3ed3b404593c",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
+      "id": "abe4ed8e-5587-47e4-854c-05b4b58cbf2e",
+      "name": "Google Sheets1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
       "position": [
-        1340,
+        2320,
+        580
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "X45h2pbnOX9dAgcA",
+          "name": "Google Sheets peixotomidias@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "paid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "fda8d3a4-e971-4fa3-b0c3-794c7d05f310",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "lost_cart",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f90e0573-85a7-402a-8770-a8a2d5e3a194",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        2000,
         540
       ]
     }
@@ -60,6 +360,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-27T03:39:37.000Z",
-  "versionId": "5039558c-679f-48a3-b4ce-a80e4a1ac966"
+  "updatedAt": "2025-05-28T00:46:42.000Z",
+  "versionId": "efefcbe5-a892-4d71-bb2f-e07c9f6609e6"
 }

@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Code": {
       "main": [
@@ -44,6 +44,17 @@
           }
         ]
       ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-05-28T00:40:36.470Z",
@@ -62,8 +73,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1340,
-        540
+        940,
+        520
       ]
     },
     {
@@ -77,7 +88,7 @@
           "conditions": [
             {
               "id": "4745f0ad-756a-41fd-8aef-87bc8086004d",
-              "leftValue": "={{ $json.customer.code }}",
+              "leftValue": "={{ $json.clienteld }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -95,8 +106,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2,
       "position": [
-        1560,
-        540
+        1120,
+        520
       ]
     },
     {
@@ -106,13 +117,13 @@
             {
               "id": "1cd6f2f6-4702-4133-ae35-31b3e6d83c58",
               "name": "clienteId",
-              "value": "={{ $json.customer.code }}",
+              "value": "={{ $json.clienteld }}",
               "type": "string"
             },
             {
-              "id": "1b58d44e-b5ce-45b5-96c3-54e269271698",
-              "name": "productid",
-              "value": "={{ $json.product.code }}",
+              "id": "135ab026-f595-4042-8f2d-4837607c4b5a",
+              "name": "produtold",
+              "value": "=4O9J39",
               "type": "string"
             }
           ]
@@ -124,13 +135,12 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1780,
-        540
+        1280,
+        520
       ]
     },
     {
       "parameters": {
-        "operation": "append",
         "documentId": {
           "__rl": true,
           "value": "1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE",
@@ -142,36 +152,19 @@
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "Página1",
+          "cachedResultName": "PAGO",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lY8K3tymeOzJql3ItF-AArK0WIO7iurW2Z4PcnksuxE/edit#gid=0"
         },
-        "columns": {
-          "mappingMode": "autoMapInputData",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [
+        "filtersUI": {
+          "values": [
             {
-              "id": "clientid",
-              "displayName": "clientid",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Nome",
-              "displayName": "Nome",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "lookupColumn": "clienteId",
+              "lookupValue": "={{ $json.clienteId }}"
             }
           ]
         },
         "options": {
-          "cellFormat": "USER_ENTERED"
+          "returnAllMatches": "returnFirstMatch"
         }
       },
       "id": "15279974-1546-4b63-861c-3002378ad9fd",
@@ -179,8 +172,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.4,
       "position": [
-        2040,
-        540
+        1480,
+        520
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -200,10 +193,23 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        1120,
-        540
+        760,
+        520
       ],
       "webhookId": "312ad55c-13d1-456e-8581-3b7465742469"
+    },
+    {
+      "parameters": {
+        "jsCode": "url = checkout.payt.com.br/non-organic-upsell/{{ $json[\"clienteId\"] }}/RDVBXR/R325AG?split=12#"
+      },
+      "id": "3d194cff-7535-4fdb-b586-6f8b5689798b",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1700,
+        520
+      ]
     }
   ],
   "pinData": {},
@@ -216,6 +222,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-28T00:43:01.000Z",
-  "versionId": "3a79abab-0d8e-4acd-a604-17063728954f"
+  "updatedAt": "2025-05-28T23:08:32.000Z",
+  "versionId": "3875c9d3-d759-4c5d-abbc-6d778db4188b"
 }

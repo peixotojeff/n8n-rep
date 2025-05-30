@@ -34,17 +34,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Switch": {
       "main": [
         [
@@ -57,6 +46,17 @@
         [
           {
             "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
             "type": "main",
             "index": 0
           }
@@ -215,22 +215,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "upsell-recuperacao",
-        "options": {}
-      },
-      "id": "62b43898-f7f5-41f7-a2ae-30390a810bf6",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        1120,
-        540
-      ],
-      "webhookId": "3a9d5bd5-f4d2-4ead-87a6-b6a924eee773"
-    },
-    {
-      "parameters": {
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -348,6 +332,29 @@
         2000,
         540
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upsell-recuperacao",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "62b43898-f7f5-41f7-a2ae-30390a810bf6",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        540
+      ],
+      "webhookId": "3a9d5bd5-f4d2-4ead-87a6-b6a924eee773",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rNYcs549xtAEhCxe",
+          "name": "Header Auth n8n upsell recuperaçao"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -360,6 +367,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-05-28T00:46:42.000Z",
-  "versionId": "efefcbe5-a892-4d71-bb2f-e07c9f6609e6"
+  "updatedAt": "2025-05-30T00:52:34.000Z",
+  "versionId": "b6462e71-8a7f-4756-945d-6593c8f789b8"
 }

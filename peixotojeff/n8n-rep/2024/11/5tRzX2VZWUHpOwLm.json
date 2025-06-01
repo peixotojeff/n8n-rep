@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Wait",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -67,30 +67,20 @@
         ]
       ]
     },
-    "Wait": {
+    "Nuvem": {
       "main": [
         [
           {
-            "node": "Wait1",
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Wait1": {
+    "Loop Over Items": {
       "main": [
-        [
-          {
-            "node": "Wait2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait2": {
-      "main": [
+        [],
         [
           {
             "node": "Nuvem",
@@ -100,11 +90,11 @@
         ]
       ]
     },
-    "Nuvem": {
+    "Evento": {
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -173,7 +163,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        940,
+        1160,
         540
       ]
     },
@@ -207,7 +197,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        720,
+        940,
         540
       ]
     },
@@ -220,7 +210,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -480,
+        140,
         540
       ]
     },
@@ -235,7 +225,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -660,
+        -40,
         540
       ],
       "webhookId": "f5add437-db2c-4189-a7c1-81a2a7246b82"
@@ -279,7 +269,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1140,
+        1360,
         540
       ],
       "alwaysOutputData": true,
@@ -322,7 +312,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1340,
+        1560,
         540
       ],
       "alwaysOutputData": true,
@@ -370,52 +360,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1520,
+        1740,
         540
       ],
       "alwaysOutputData": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {},
-      "id": "2c0d0e9d-33b6-4386-bc48-505ec790465a",
-      "name": "Wait",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -260,
-        540
-      ],
-      "webhookId": "0cb53359-d3f5-4c53-8ea2-3787ddc8e536"
-    },
-    {
-      "parameters": {
-        "amount": 3
-      },
-      "id": "1020bbbe-4f97-4aa4-a41b-f653f46e1d7d",
-      "name": "Wait1",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -40,
-        540
-      ],
-      "webhookId": "25857514-4f0a-4f85-9e3e-a666c972c283"
-    },
-    {
-      "parameters": {
-        "amount": 1
-      },
-      "id": "9c854aa6-1882-469f-909d-f9ed03e5a58f",
-      "name": "Wait2",
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        180,
-        540
-      ],
-      "webhookId": "ef1269e4-926c-4e44-a60a-cd26b487b22d"
     },
     {
       "parameters": {
@@ -446,10 +396,25 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        500,
+        720,
         540
       ],
       "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "57a70706-ecd1-48a8-93d5-656bbaed9d9e",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        400,
+        540
+      ]
     }
   ],
   "pinData": {},
@@ -489,6 +454,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-15T23:43:35.000Z",
-  "versionId": "c3093161-097d-4cd2-8407-2b0f8b08901d"
+  "updatedAt": "2025-05-31T05:10:34.000Z",
+  "versionId": "1ab5ffc8-3f57-4810-b610-b3c09ee07e49"
 }

@@ -1,0 +1,446 @@
+{
+  "active": false,
+  "connections": {
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Update tries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set tries": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Success",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Catch known error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update tries": {
+      "main": [
+        [
+          {
+            "node": "If tries left",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If tries left": {
+      "main": [
+        [
+          {
+            "node": "Set tries",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry limit reached",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set tries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Catch known error": {
+      "main": [
+        [
+          {
+            "node": "Known Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-31T05:16:58.200Z",
+  "id": "qD77cvNKb0ZgQBSF",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "errorMessage": "Retry limit reached"
+      },
+      "id": "3d3e7ce9-bd7b-47e3-a5cb-5b59a1da7569",
+      "name": "Retry limit reached",
+      "type": "n8n-nodes-base.stopAndError",
+      "position": [
+        220,
+        740
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd93a7f6-4c06-4e8a-8d0d-e812c5ec4bc5",
+              "name": "tries",
+              "type": "number",
+              "value": "={{ $json.tries || 1 }}"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "72e01968-5474-4037-8b48-1cba25949778",
+      "name": "Set tries",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        220,
+        500
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df3c9b29-afa6-4e08-868d-5b7e8202eefa",
+              "name": "tries",
+              "type": "number",
+              "value": "={{ $('Set tries').item.json.tries + 1 }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1149c470-2995-4234-ac44-263736915e3b",
+      "name": "Update tries",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1100,
+        740
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {},
+      "id": "db059a62-ee14-49cb-99ff-5426e8cdc7ff",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        880,
+        740
+      ],
+      "webhookId": "9d3b561f-4afd-478c-8f6e-60641d4f1d0b",
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "6a379b06-0b04-4ae4-9bf9-394bd40744b7",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "could not be found"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "17cd99a4-c26d-4cdd-abf6-0bf2d72b6f89",
+      "name": "Catch known error",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        660,
+        620
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {},
+      "id": "eecebfb7-c5cc-422c-b657-41f3842c936d",
+      "name": "Replace Me",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        440,
+        500
+      ],
+      "typeVersion": 1,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "id": "e8a6cd55-be5e-47df-9187-bfd1a2c0a919",
+      "name": "Success",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        660,
+        380
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "f04401fe-bbf0-45bf-9993-b591ec94c7a3",
+      "name": "Known Error",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        880,
+        500
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Set filter\nFilter by status code or error message.",
+        "height": 240,
+        "width": 220
+      },
+      "id": "9f3a91e9-3a73-4e02-b5dc-d47ed38cef6b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        520
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Replace Node\nReplace this by the Node which retrieves the admired data.\nEnable error branch in Node Settings and connect the outputs like in this example",
+        "height": 320,
+        "width": 220
+      },
+      "id": "61b0d72f-8e1f-4e70-8895-004d68604f6c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        380,
+        320
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Set max tries\nChange if needed, default is 3",
+        "height": 220,
+        "width": 220
+      },
+      "id": "5031fd5f-0dea-4d41-80ab-90f9a96cf7da",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -60,
+        660
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "85ed0a63-3d8f-4ba6-9403-da287730d013",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        500
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Set Wait\nChange duration if needed, default is 5s",
+        "height": 240,
+        "width": 220
+      },
+      "id": "ceb6b085-cc54-4c15-bfc5-e693ed8bdae2",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        820,
+        640
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Continue here, if the request succeeded",
+        "height": 200,
+        "width": 220,
+        "color": 7
+      },
+      "id": "04e2b5dc-4dad-4581-84d5-b2b1d306d914",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        320
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Continue here, if the request failed",
+        "height": 200,
+        "width": 220,
+        "color": 7
+      },
+      "id": "5c71d4bc-0c5b-492c-b2e0-79c738695d2c",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        820,
+        440
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Stop here, if all tries have failed",
+        "height": 220,
+        "width": 220,
+        "color": 7
+      },
+      "id": "9f030cc2-4829-48a5-96f0-ec8cd1dcbc8b",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        660
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Define counter for tries",
+        "height": 220,
+        "width": 220,
+        "color": 7
+      },
+      "id": "0c69cc84-e834-4b90-8072-4f0f3e9bb68c",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        440
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "b18f784a-4386-4ced-a9e1-ce5a21ad036e",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              },
+              "leftValue": "={{ $json.tries }}",
+              "rightValue": 3
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2fbf73f1-777a-424a-a3cb-3d22b74cd7c9",
+      "name": "If tries left",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        0,
+        740
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "content": "Update counter for tries",
+        "height": 220,
+        "width": 220,
+        "color": 7
+      },
+      "id": "c7ce961f-66f8-4e1a-be6c-1f923d11b450",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1040,
+        680
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n-rep",
+  "repo_owner": "peixotojeff",
+  "repo_path": "peixotojeff/n8n-rep/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-31T05:16:58.200Z",
+  "versionId": "08d7435d-ca91-4cf7-bdf2-d35ec926cca1"
+}

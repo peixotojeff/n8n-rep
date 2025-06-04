@@ -951,7 +951,6 @@
         380
       ],
       "alwaysOutputData": true,
-      "disabled": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
     },
@@ -996,7 +995,6 @@
         900
       ],
       "alwaysOutputData": true,
-      "disabled": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
     },
@@ -1041,7 +1039,6 @@
         1520
       ],
       "alwaysOutputData": true,
-      "disabled": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
     },
@@ -1086,7 +1083,6 @@
         2160
       ],
       "alwaysOutputData": true,
-      "disabled": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
     },
@@ -1131,7 +1127,6 @@
         2700
       ],
       "alwaysOutputData": true,
-      "disabled": true,
       "continueOnFail": true,
       "onError": "continueRegularOutput"
     },
@@ -1162,7 +1157,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set1\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Pix Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set1\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set1\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Payt Pix Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set1\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -1210,7 +1205,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Boleto Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Payt Boleto Gerado\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"value\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"amount\"] }}\",\n      \"value_currency\": \"BRL\",\n      \"time\": \"{{ $node[\"Switch\"].json[\"charges\"][\"0\"][\"created_at\"] }}\"\n    }\n  }\n}\n",
         "options": {
           "redirect": {
             "redirect": {
@@ -1354,7 +1349,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set5\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Refused Transaction\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set5\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"time\": \"{{ new Date($('Switch').item.json.body.started_at).toISOString()}}\",\n      \"value\": \"{{ ($('Switch').item.json.body.product.price / 100).toFixed(2) }}\",\n      \"value_currency\": \"BRL\"\n    }\n  }\n}",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"properties\": {\n        \"ProductName\": \"{{ $node[\"Set5\"].json[\"Produto\"] }}\"\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Payt Compra Recusada\"\n          }\n        }\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $node[\"Set5\"].json[\"email\"] }}\"\n          }\n        }\n      },\n      \"time\": \"{{ new Date($('Switch').item.json.body.started_at).toISOString()}}\",\n      \"value\": \"{{ ($('Switch').item.json.body.product.price / 100).toFixed(2) }}\",\n      \"value_currency\": \"BRL\"\n    }\n  }\n}",
         "options": {
           "redirect": {
             "redirect": {
@@ -1559,6 +1554,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-06-02T01:32:53.000Z",
-  "versionId": "3fea2bbf-120b-4ec6-bf72-036dca36e9aa"
+  "updatedAt": "2025-06-03T22:45:03.000Z",
+  "versionId": "6d29066e-bb7b-476b-b7fe-a3b10952f17a"
 }

@@ -396,10 +396,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        720,
+        700,
         540
       ],
-      "retryOnFail": true
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5
     },
     {
       "parameters": {
@@ -454,6 +456,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-31T05:10:34.000Z",
-  "versionId": "1ab5ffc8-3f57-4810-b610-b3c09ee07e49"
+  "updatedAt": "2025-06-04T20:19:07.000Z",
+  "versionId": "6e30080b-b8ba-492a-87d3-c4214dc28d51"
 }

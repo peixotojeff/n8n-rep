@@ -140,7 +140,9 @@
         380,
         1300
       ],
-      "retryOnFail": true
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 2000
     },
     {
       "parameters": {
@@ -442,6 +444,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-15T23:58:34.000Z",
-  "versionId": "c024c080-03ee-4d87-8f19-dfc4e78d06d1"
+  "updatedAt": "2025-06-16T01:26:07.000Z",
+  "versionId": "858981cc-4a80-4c84-8ebf-b922b8833e0d"
 }
